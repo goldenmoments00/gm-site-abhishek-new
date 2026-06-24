@@ -1,0 +1,51 @@
+# Robots.txt for Golden Moment - Wedding Photography
+# Website: goldenmoment.in
+# Company: Premium wedding photography services
+
+# Allow all web crawlers to access the entire site
+User-agent: *
+Allow: /
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Disallow access to sensitive or unnecessary directories
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /temp/
+Disallow: /private/
+
+# Allow access to important pages for SEO
+Allow: /gallery
+Allow: /packages
+Allow: /contact
+Allow: /about
+Allow: /landing
+
+# Allow access to image directories for better image SEO
+Allow: /images/
+Allow: /public/images/
+Allow: /photos/
+
+# Sitemap location (update this URL when you deploy)
+Sitemap: https://goldenmoment.in/sitemap.xml
+
+# Additional notes:
+# - This robots.txt encourages indexing of photography portfolios
+# - Gallery and package pages are explicitly allowed for better visibility
+# - Contact and about pages are allowed for local SEO
+# - Image directories are allowed for image search optimization
+# - API routes and build files are protected from crawling

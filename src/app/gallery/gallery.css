@@ -1,0 +1,11 @@
+/* Gallery page styles (marquee tracks live in globals.css) */
+
+/* Film sprocket holes for the Behind the Lens reel */
+.film-hole {
+  width: 20px;
+  height: 13px;
+  border-radius: 3px;
+  background: #fff6e5;
+  opacity: 0.16;
+  flex-shrink: 0;
+}
