@@ -5820,5 +5820,84 @@
       src="/webflow/pictlens/js/webflow.682ebdb5.57f517ef836b5d9c.js"
       type="text/javascript"
     ></script>
+    <script>
+      // Scroll animation for the bottom text and icons
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. Move upwards animation for the entire grid (keeps columns perfectly aligned)
+        const gridContainer = document.querySelector('.w-layout-grid.header-content-grid');
+        
+        // 2. Prepare text for random letter fade out (including Since 2025 and Agartala)
+        const textElements = document.querySelectorAll('.w-layout-grid.header-content-grid .subtitle, .w-layout-grid.header-content-grid .text-size-regular, .w-layout-grid.header-content-grid .text-size-small');
+        const allLetters = [];
+        
+        textElements.forEach(el => {
+          const text = el.textContent.trim();
+          el.innerHTML = '';
+          for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            if (char === ' ') {
+              el.appendChild(document.createTextNode(' '));
+            } else {
+              const span = document.createElement('span');
+              span.textContent = char;
+              // Random scroll threshold between 0px and 100px for fading
+              span.dataset.fadeStart = Math.random() * 80;
+              span.dataset.fadeRange = Math.random() * 150 + 50; 
+              // Prevent spans from breaking flex layouts or word wrapping badly
+              span.style.display = 'inline-block';
+              el.appendChild(span);
+              allLetters.push(span);
+            }
+          }
+        });
+
+        // 3. Prepare icons for fade out
+        const icons = document.querySelectorAll('.globe-lottie, .location-lottie');
+        icons.forEach(icon => {
+           icon.dataset.fadeStart = Math.random() * 80;
+           icon.dataset.fadeRange = Math.random() * 150 + 50;
+        });
+        
+        window.addEventListener('scroll', () => {
+          const scrollY = window.scrollY;
+          
+          // Upwards movement (applied to the entire container to preserve alignment)
+          if (gridContainer) {
+            const yPos = -(scrollY * 0.15); 
+            gridContainer.style.transform = `translateY(${yPos}px)`;
+          }
+          
+          // Letter random fade out
+          allLetters.forEach(span => {
+            const fadeStart = parseFloat(span.dataset.fadeStart);
+            const fadeRange = parseFloat(span.dataset.fadeRange);
+            
+            let opacity = 1;
+            if (scrollY > fadeStart) {
+               opacity = 1 - ((scrollY - fadeStart) / fadeRange);
+            }
+            if (opacity < 0) opacity = 0;
+            if (opacity > 1) opacity = 1;
+            
+            span.style.opacity = opacity;
+          });
+
+          // Icon fade out
+          icons.forEach(icon => {
+            const fadeStart = parseFloat(icon.dataset.fadeStart);
+            const fadeRange = parseFloat(icon.dataset.fadeRange);
+            
+            let opacity = 1;
+            if (scrollY > fadeStart) {
+               opacity = 1 - ((scrollY - fadeStart) / fadeRange);
+            }
+            if (opacity < 0) opacity = 0;
+            if (opacity > 1) opacity = 1;
+            
+            icon.style.opacity = opacity;
+          });
+        });
+      });
+    </script>
   </body>
 </html>
