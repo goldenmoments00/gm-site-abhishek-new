@@ -5421,16 +5421,27 @@ blockquote {
 }
 
 .testimonial-content-wrapper {
-  border: 1px solid var(--border-color--border-primary);
-  background-color: var(--primary-color--dark);
-  padding: 2rem;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.testimonial-content-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px -10px rgba(0, 0, 0, 0.1);
 }
 
 .testimonial-text {
-  color: var(--neutral-color--secondary-neutral);
+  color: #1a1a1a;
+  font-family: var(--font-nyght-serif), 'Cormorant', serif;
   font-size: 1.25rem;
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .testimonial-content {
@@ -5446,26 +5457,35 @@ blockquote {
 .testimonial-picture {
   object-fit: cover;
   border-radius: 100%;
-  width: 5.5rem;
-  height: 5.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .testimonial-name {
+  color: #1a1a1a;
   text-align: left;
-  font-size: 1.625rem;
+  font-size: 1.125rem;
+  font-weight: 600;
   line-height: 1.2;
+  font-family: var(--font-plus-jakarta-sans), 'IBM Plex Sans', sans-serif;
 }
 
 .testimonial-description {
-  color: var(--neutral-color--secondary-neutral);
-  text-align: right;
-  font-size: 1rem;
+  color: #666666;
+  text-align: left;
+  font-size: 0.875rem;
+  font-family: var(--font-plus-jakarta-sans), 'IBM Plex Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
 }
 
 .quote-icon {
-  opacity: 0.05;
-  height: 2.75rem;
+  opacity: 0.15;
+  height: 2.5rem;
   margin-bottom: 1.5rem;
+  filter: invert(1);
 }
 
 .testimonial-wrapper {
@@ -5477,15 +5497,16 @@ blockquote {
 }
 
 .testimonial-opacity {
-  background-image: linear-gradient(90deg, var(--primary-color--black), #fff0);
+  background-image: linear-gradient(90deg, #FFF6E5, rgba(255, 246, 229, 0));
   width: 4rem;
   height: 100%;
   position: absolute;
   inset: 0% auto 0% 0%;
+  pointer-events: none;
 }
 
 .testimonial-opacity.is-right {
-  background-image: linear-gradient(270deg, var(--primary-color--black), #fff0);
+  background-image: linear-gradient(270deg, #FFF6E5, rgba(255, 246, 229, 0));
   inset: 0% 0% 0% auto;
 }
 
