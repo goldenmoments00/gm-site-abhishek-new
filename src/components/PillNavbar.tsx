@@ -5,12 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { Home, Film, Box, Info, ArrowUpRight, Menu, X, BookOpen, Phone, MapPin } from "lucide-react";
+import { Home, Film, Box, Info, ArrowUpRight, Menu, X, BookOpen, Phone, MapPin, Heart } from "lucide-react";
 import { nyghtSerif } from "@/lib/fonts";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/", icon: Home },
   { label: "Gallery", href: "/gallery", icon: Film },
+  { label: "Hall of Love", href: "/hall-of-love", icon: Heart },
   { label: "Packages", href: "/packages", icon: Box },
   { label: "Journal", href: "/blog", icon: BookOpen },
   { label: "About", href: "/about", icon: Info },

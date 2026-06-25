@@ -197,18 +197,18 @@ const Footer = () => {
         <div className="w-full flex flex-col md:flex-row items-center justify-between border-t border-white/10 pt-6 gap-4 text-[10px] sm:text-xs text-[#FFF6E5]/60 uppercase tracking-widest font-medium">
           <p>© 2026 Golden Moments. All Rights Reserved.</p>
           <div className="flex flex-wrap justify-center gap-6 md:gap-8">
-            <Link href="/terms" className="hover:text-white transition-colors">
+            <a href="/terms" target="_top" className="hover:text-white transition-colors">
               Terms & Conditions
-            </Link>
-            <Link href="/privacy" className="hover:text-white transition-colors">
+            </a>
+            <a href="/privacy" target="_top" className="hover:text-white transition-colors">
               Privacy Policy
-            </Link>
-            <Link href="/blog" className="hover:text-white transition-colors">
+            </a>
+            <a href="/blog" target="_top" className="hover:text-white transition-colors">
               Journal
-            </Link>
-            <Link href="/contact" className="hover:text-white transition-colors">
+            </a>
+            <a href="/contact" target="_top" className="hover:text-white transition-colors">
               Contact
-            </Link>
+            </a>
           </div>
         </div>
       </motion.div>
