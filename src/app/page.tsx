@@ -15,7 +15,7 @@ export default function PictlensPage() {
         if (iframeRef.current?.contentDocument) {
           const doc = iframeRef.current.contentDocument;
           setIframeDoc(doc);
-          
+
           // Inject Tailwind CDN if not present so React components render correctly inside iframe
           if (!doc.querySelector('script[src="https://cdn.tailwindcss.com"]')) {
             const script = doc.createElement('script');
@@ -63,7 +63,7 @@ export default function PictlensPage() {
       <PillNavbar />
       <iframe
         ref={iframeRef}
-        src="/pictlens.html"
+        src="/pictlens.html?v=6"
         style={{
           position: "fixed",
           top: 0,
@@ -80,7 +80,7 @@ export default function PictlensPage() {
         iframeDoc.getElementById("premium-testimonials-root") &&
         createPortal(
           <div className={`${document.documentElement.className} antialiased`}>
-             <PremiumTimelineTestimonials />
+            <PremiumTimelineTestimonials />
           </div>,
           iframeDoc.getElementById("premium-testimonials-root")!
         )}

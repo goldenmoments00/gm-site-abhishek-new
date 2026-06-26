@@ -305,13 +305,13 @@
         position: relative;
         z-index: 1;
         background-color: #fff6e5;
-        margin-top: -14vw; /* Pulled up more on desktop to increase overlap and avoid gaps */
+        margin-top: -30vw; /* Pulled up more on desktop to increase overlap and avoid gaps */
         overflow: hidden;
       }
 
       @media screen and (max-width: 767px) {
         .section-slideshow {
-          margin-top: -30vw; /* Large overlap on smaller screens to cover the bottom torn paper edge */
+          margin-top: -42vw; /* Large overlap on smaller screens to cover the bottom torn paper edge */
         }
       }
 
@@ -1249,6 +1249,7 @@
          with the torn paper bg painted by a pseudo-element. */
       .section-home-portfolio .padding-top.padding-huge .top-content-grid {
         position: relative;
+        z-index: 10;
         left: 50%;
         transform: translateX(-50%);
         width: 100vw;
@@ -4136,6 +4137,7 @@
           <div
             data-w-id="7e7c4be2-8c0d-5793-1c7f-6c4eb0b5b609"
             class="portfolio-content-wrapper"
+            style="margin-top: -324px;"
           >
             <div class="left-portfolio-content">
               <div class="left-portfolio-wrapper">

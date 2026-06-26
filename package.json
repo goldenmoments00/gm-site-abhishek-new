@@ -50,6 +50,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.177.0",
+    "agentation": "^3.0.2",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "postcss": "^8.5.15",

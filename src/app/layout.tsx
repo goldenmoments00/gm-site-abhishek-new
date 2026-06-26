@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { morganite, nyghtSerif, plusJakartaSans } from "@/lib/fonts";
 import "./globals.css";
+import { Agentation } from "agentation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${morganite.variable} ${nyghtSerif.variable} ${plusJakartaSans.variable} antialiased`}
       >
         {children}
+        {process.env.NODE_ENV === "development" && <Agentation />}
       </body>
     </html>
   );
