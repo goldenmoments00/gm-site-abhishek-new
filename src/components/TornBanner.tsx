@@ -59,11 +59,11 @@ export default function TornBanner({ lead, title, id }: TornBannerProps) {
                 reduced
                   ? false
                   : {
-                      opacity: 0,
-                      y: "0.35em",
-                      rotateY: 80,
-                      filter: "blur(6px)",
-                    }
+                    opacity: 0,
+                    y: "0.35em",
+                    rotateY: 80,
+                    filter: "blur(6px)",
+                  }
               }
               whileInView={{
                 opacity: 1,

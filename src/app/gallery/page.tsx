@@ -428,7 +428,7 @@ function CategoryCardItem({
       type="button"
       onClick={() => onSelect(category)}
       aria-label={`View ${category} collection`}
-      className={`group relative aspect-video w-full overflow-hidden rounded-xl text-left shadow-[0_14px_38px_rgba(26,26,26,0.12)] transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#8a1212]/60 ${className}`}
+      className={`group relative aspect-video w-full overflow-hidden rounded-none text-left shadow-[0_14px_38px_rgba(26,26,26,0.12)] transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#8a1212]/60 ${className}`}
     >
       {cover && (
         <Image
@@ -569,7 +569,7 @@ function CollageTile({
       type="button"
       onClick={onClick}
       aria-label={`Open ${image.title}`}
-      className="group relative block w-full overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#8a1212]/60"
+      className="group relative block w-full overflow-hidden rounded-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#8a1212]/60"
     >
       <Image
         src={image.src}

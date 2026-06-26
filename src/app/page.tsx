@@ -63,7 +63,7 @@ export default function PictlensPage() {
       <PillNavbar />
       <iframe
         ref={iframeRef}
-        src="/pictlens.html?v=6"
+        src="/pictlens.html?v=40"
         style={{
           position: "fixed",
           top: 0,

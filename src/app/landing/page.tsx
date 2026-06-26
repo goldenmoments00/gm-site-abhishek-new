@@ -313,37 +313,36 @@ export default function PictlensLanding() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                   <div>
                     <div className="font-nyght-serif italic text-lg text-gray-600 mb-4">
-                      Defining Personal Identity
+                      The Big Day
                     </div>
                     <h3 className="font-morganite font-bold text-4xl mb-6">
-                      Portrait Photography
+                      Wedding
                     </h3>
                     <p className="font-plus-jakarta-sans text-lg text-gray-600 mb-6">
-                      Studio or location portraits that reflect personality,
-                      professionalism, or lifestyle.
+                      Comprehensive and cinematic coverage of your special day from start to finish.
                     </p>
                     <ul className="space-y-3 text-gray-600">
                       <li className="font-plus-jakarta-sans">
-                        • Natural lighting & studio options
+                        • Complete day coverage
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Retouching and skin tone accuracy
+                        • Candid and posed moments
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Ideal for branding & social profiles
+                        • High-resolution edited photos
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Multiple background choices
+                        • Cinematic wedding films
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Expression coaching
+                        • Premium photo albums
                       </li>
                     </ul>
                   </div>
                   <div className="relative aspect-square overflow-hidden rounded-lg">
                     <Image
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&crop=face"
-                      alt="Portrait Photography"
+                      src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&h=1000&fit=crop&crop=faces"
+                      alt="Wedding"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-105"
                     />
@@ -360,37 +359,36 @@ export default function PictlensLanding() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                   <div className="lg:order-2">
                     <div className="font-nyght-serif italic text-lg text-gray-600 mb-4">
-                      Moments That Matter
+                      Your Best Angles
                     </div>
                     <h3 className="font-morganite font-bold text-4xl mb-6">
-                      Event Photography
+                      Portfolio
                     </h3>
                     <p className="font-plus-jakarta-sans text-lg text-gray-600 mb-6">
-                      Comprehensive visual coverage of corporate, cultural, or
-                      private events with a documentary style.
+                      Professional modeling and personal portfolios that capture your unique style and essence.
                     </p>
                     <ul className="space-y-3 text-gray-600">
                       <li className="font-plus-jakarta-sans">
-                        • Candid & posed shots
+                        • Indoor and outdoor locations
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Multi-camera setup available
+                        • Multiple outfit changes
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Real-time photo delivery options
+                        • Professional lighting setup
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Discreet, professional presence
+                        • Concept and mood boarding
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Photo albums & recap services
+                        • High-end retouching
                       </li>
                     </ul>
                   </div>
                   <div className="relative aspect-square overflow-hidden rounded-lg lg:order-1">
                     <Image
-                      src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&h=600&fit=crop"
-                      alt="Event Photography"
+                      src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&h=1120&fit=crop&crop=faces"
+                      alt="Portfolio"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-105"
                     />
@@ -407,37 +405,36 @@ export default function PictlensLanding() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                   <div>
                     <div className="font-nyght-serif italic text-lg text-gray-600 mb-4">
-                      Visuals That Sell
+                      Before The Vows
                     </div>
                     <h3 className="font-morganite font-bold text-4xl mb-6">
-                      Commercial Photography
+                      Pre Wedding
                     </h3>
                     <p className="font-plus-jakarta-sans text-lg text-gray-600 mb-6">
-                      High-impact imagery designed to elevate brand identity,
-                      drive engagement, and boost conversions.
+                      Romantic and cinematic pre-wedding shoots that tell the story of your love before the big day.
                     </p>
                     <ul className="space-y-3 text-gray-600">
                       <li className="font-plus-jakarta-sans">
-                        • Brand-aligned compositions
+                        • Exotic and scenic locations
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Studio & on-location flexibility
+                        • Story-driven cinematic films
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Product and lifestyle shots
+                        • Drone and aerial shots
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Art direction included
+                        • Styling and conceptualization
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Optimized for web and print
+                        • Save the date teasers
                       </li>
                     </ul>
                   </div>
                   <div className="relative aspect-square overflow-hidden rounded-lg">
                     <Image
-                      src="https://images.unsplash.com/photo-1556155092-490a1ba16284?w=600&h=600&fit=crop"
-                      alt="Commercial Photography"
+                      src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&h=600&fit=crop&crop=entropy"
+                      alt="Pre Wedding"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-105"
                     />
@@ -454,37 +451,36 @@ export default function PictlensLanding() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                   <div className="lg:order-2">
                     <div className="font-nyght-serif italic text-lg text-gray-600 mb-4">
-                      Precision in details
+                      First Bites
                     </div>
                     <h3 className="font-morganite font-bold text-4xl mb-6">
-                      Product Photography
+                      Rice Ceremony
                     </h3>
                     <p className="font-plus-jakarta-sans text-lg text-gray-600 mb-6">
-                      Clean, high-resolution product images designed to boost
-                      e-commerce and marketing
+                      Capturing the joy and tradition of your little one's Annaprashan and first beautiful milestones.
                     </p>
                     <ul className="space-y-3 text-gray-600">
                       <li className="font-plus-jakarta-sans">
-                        • White background or lifestyle setups
+                        • Traditional ceremony coverage
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Consistent angles & lighting
+                        • Candid family moments
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Macro photography available
+                        • Baby portraits
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Shadow & reflection control
+                        • Vibrant cultural colors
                       </li>
                       <li className="font-plus-jakarta-sans">
-                        • Web-optimized formats
+                        • High-quality prints
                       </li>
                     </ul>
                   </div>
                   <div className="relative aspect-square overflow-hidden rounded-lg lg:order-1">
                     <Image
-                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop"
-                      alt="Product Photography"
+                      src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&h=1040&fit=crop&crop=faces"
+                      alt="Rice Ceremony"
                       fill
                       className="object-cover transition-transform duration-700 hover:scale-105"
                     />

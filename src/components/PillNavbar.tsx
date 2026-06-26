@@ -37,6 +37,7 @@ export default function PillNavbar() {
     const handleMessage = (event: MessageEvent) => {
       if (event.data && event.data.type === "iframe-scroll") {
         const { scrollY, direction } = event.data;
+        setIsScrolled(scrollY > 20);
         if (direction === "down" && scrollY > 150) {
           setHidden(true);
         } else {
@@ -84,7 +85,7 @@ export default function PillNavbar() {
           </Link>
 
           {/* Nav Links - Scrollable on Mobile */}
-          <nav className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth pr-2">
+          <nav className="flex items-center gap-2 overflow-x-auto md:overflow-visible no-scrollbar scroll-smooth px-2 md:px-0 py-2 md:py-0">
             {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href;
               const Icon = item.icon;
