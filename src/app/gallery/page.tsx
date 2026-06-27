@@ -140,6 +140,25 @@ const galleryImages: GalleryImage[] = [
 const categories = ["All", "Wedding", "Pre Wedding", "Rice Ceremony", "Maternity", "Portfolio", "Corporate"];
 const eventCategories = categories.filter((c) => c !== "All");
 
+const CustomImageIcon = ({ src, alt, size = 24, className = "" }: any) => (
+  <img
+    src={src}
+    alt={alt}
+    width={size}
+    height={size}
+    className={`object-contain ${className}`}
+  />
+);
+
+const categoryIcons: Record<string, React.ElementType> = {
+  Wedding: ({ size, className }) => <CustomImageIcon src="/icon-wedding.png" alt="Wedding" size={size} className={className} />,
+  "Pre Wedding": ({ size, className }) => <CustomImageIcon src="/icon-prewedding.png" alt="Pre Wedding" size={size} className={className} />,
+  "Rice Ceremony": ({ size, className }) => <CustomImageIcon src="/icon-riceceremony.png" alt="Rice Ceremony" size={size} className={className} />,
+  Maternity: ({ size, className }) => <CustomImageIcon src="/icon-maternity.png" alt="Maternity" size={size} className={className} />,
+  Portfolio: ({ size, className }) => <CustomImageIcon src="/icon-person.png" alt="Portfolio" size={size} className={className} />,
+  Corporate: ({ size, className }) => <CustomImageIcon src="/corporate.png" alt="Corporate" size={size} className={className} />,
+};
+
 const categoryTagline: Record<string, string> = {
   Wedding: "The Big Day",
   "Pre Wedding": "Before The Vows",
@@ -354,25 +373,33 @@ function GalleryHero({ onJump }: { onJump: (category: string) => void }) {
           initial={reduced ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.05 }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
+          className="mt-6 flex justify-center w-full px-4"
         >
-          <span
-            className="font-plusJakartaSans text-[10px] font-bold uppercase tracking-[0.25em]"
-            style={{ color: `${INK}59` }}
-          >
-            Jump to
-          </span>
-          {eventCategories.map((category) => (
-            <button
-              key={category}
-              type="button"
-              onClick={() => onJump(category)}
-              className="font-nyghtSerif text-base italic underline decoration-1 underline-offset-4 transition-colors hover:text-[#8a1212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8a1212] rounded md:text-lg"
-              style={{ color: INK, textDecorationColor: `${INK}40` }}
-            >
-              {category}
-            </button>
-          ))}
+          <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-6 gap-y-2">
+            {eventCategories.map((category) => {
+              const Icon = categoryIcons[category];
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => onJump(category)}
+                  className="group flex flex-col items-center justify-center gap-1.5 transition-colors hover:text-[#8a1212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8a1212] rounded-lg px-2 py-1"
+                  style={{ color: INK }}
+                >
+                  {Icon && (
+                    <Icon
+                      size={22}
+                      strokeWidth={1.5}
+                      className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#8a1212]"
+                    />
+                  )}
+                  <span className="font-plusJakartaSans text-[10px] md:text-xs font-semibold transition-colors group-hover:text-[#8a1212]">
+                    {category}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </motion.div>
 
         <motion.button
@@ -388,8 +415,9 @@ function GalleryHero({ onJump }: { onJump: (category: string) => void }) {
           <motion.span
             animate={reduced ? undefined : { y: [0, 3, 0] }}
             transition={reduced ? undefined : { duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="flex h-full w-full items-center justify-center"
           >
-            <ArrowDown size={17} aria-hidden="true" />
+            <ArrowDown size={17} aria-hidden="true" className="mt-0.5" />
           </motion.span>
         </motion.button>
       </div>
@@ -466,7 +494,7 @@ function CategoryCards({ onSelect }: { onSelect: (category: string) => void }) {
   // Pause the auto-scroll while touched/hovered so cards stay tappable.
   const [paused, setPaused] = useState(false);
   return (
-    <section className={`${TORN_OVERLAP} pb-20 md:pb-24 pt-16 md:pt-24`}>
+    <section id="collection" className={`${TORN_OVERLAP} pb-20 md:pb-24 pt-16 md:pt-24`}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
