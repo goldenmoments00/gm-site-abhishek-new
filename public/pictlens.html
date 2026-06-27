@@ -58,6 +58,7 @@
     .header-container.is-header {
       flex-wrap: wrap;
       justify-content: center;
+      margin-top: 10px;
     }
 
     .heading-component {
@@ -4622,6 +4623,24 @@
 
       window.addEventListener('scroll', onScrollHero, { passive: true });
       onScrollHero();
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', function() {
+        const currentScrollY = window.scrollY;
+        const direction = currentScrollY > lastScrollY ? 'down' : 'up';
+        lastScrollY = currentScrollY;
+        
+        // Send message to parent window for PillNavbar
+        window.parent.postMessage({
+          type: 'iframe-scroll',
+          scrollY: currentScrollY,
+          direction: direction
+        }, '*');
+      }, { passive: true });
     });
   </script>
 </body>
