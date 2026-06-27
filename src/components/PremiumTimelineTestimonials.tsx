@@ -265,7 +265,7 @@ export default function PremiumTimelineTestimonials() {
       {/* Subtle radial gradient background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(245,245,245,1)_0%,_rgba(255,255,255,0)_70%)] opacity-50 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-[1500px] mx-auto px-6 lg:px-12 relative z-10">
         {/* Section Heading */}
         <div className="mb-16 md:mb-24 flex flex-col items-center text-center">
           <div className="font-nyght-serif font-serif text-[#111111] uppercase flex flex-col items-center">
@@ -317,7 +317,7 @@ export default function PremiumTimelineTestimonials() {
         {/* Content Layout */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
           {/* Left Column: Timeline */}
-          <div className="w-full lg:w-[35%] relative h-[400px] lg:h-[500px] flex justify-center lg:justify-start lg:pl-10">
+          <div className="w-full lg:w-[250px] shrink-0 relative h-[400px] lg:h-[500px] flex justify-center lg:justify-start lg:pl-4">
             {/* Avatars Container */}
             <div
               ref={containerRef}
@@ -447,7 +447,7 @@ export default function PremiumTimelineTestimonials() {
           </div>
 
           {/* Right Column: Active Testimonial */}
-          <div className="w-full lg:w-[65%] lg:pr-10 lg:pl-[200px]">
+          <div className="w-full flex-1 lg:pl-32 lg:pr-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTestimonial.id}
@@ -460,7 +460,7 @@ export default function PremiumTimelineTestimonials() {
                 {/* Review Elements Removed as Requested */}
 
                 {/* Review */}
-                <p className="font-mono text-[22px] leading-[1.8] text-gray-800 mb-10 max-w-2xl">
+                <p className="font-mono text-[19px] leading-[1.9] text-gray-800 mb-10 max-w-[1070px]">
                   {activeTestimonial.review}
                 </p>
 
