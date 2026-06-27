@@ -179,13 +179,13 @@ function ParallaxPhoto({
   scrollYProgress: any;
 }) {
   const reduced = useReducedMotion();
-  
+
   // Move outwards (away from center) instead of inwards
   const y = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : -photo.moveY * 1.5]);
   const x = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : -photo.moveX * 1.5]);
   // Increase rotation slightly as they move out
   const rotate = useTransform(scrollYProgress, [0, 1], [photo.rotate, photo.rotate * 1.5]);
-  
+
   // Blur as it scrolls
   const blurValue = useTransform(scrollYProgress, [0, 1], [0, 12]);
   const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
@@ -226,14 +226,14 @@ function MarqueeRow({
 }) {
   // Repeat enough times to create a very long track
   const track = [...images, ...images, ...images, ...images];
-  
+
   // Smooth the scroll progress so the movement has buttery inertia
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 60, damping: 20, restDelta: 0.001 });
 
   // Move a much smaller distance for a slower, graceful effect
   const xLeft = useTransform(smoothProgress, [0, 1], ["-5%", "-15%"]);
   const xRight = useTransform(smoothProgress, [0, 1], ["-15%", "-5%"]);
-  
+
   const x = direction === "left" ? xLeft : xRight;
 
   return (
@@ -307,19 +307,19 @@ function GalleryHero({ onJump }: { onJump: (category: string) => void }) {
           <span aria-hidden="true" className="inline-block h-px w-8 sm:w-10" style={{ backgroundColor: RED }} />
         </motion.p>
 
-        <div className="relative mt-4">
+        <div className="relative mt-4 flex flex-row items-center justify-center gap-4">
           <motion.span
-            initial={reduced ? false : { opacity: 0, x: -16, rotate: -8 }}
-            animate={{ opacity: 1, x: 0, rotate: -6 }}
+            initial={reduced ? false : { opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.75 }}
-            className="absolute -top-3 left-1 z-10 font-nyghtSerif text-3xl italic md:-top-5 md:left-6 md:text-5xl"
-            style={{ color: RED }}
+            className="z-10 text-[2.5rem] md:text-5xl font-bold"
+            style={{ color: RED, fontFamily: 'BrittanySignature, sans-serif' }}
           >
-            our
+            Our
           </motion.span>
           <h1
             className="font-morganite font-bold uppercase leading-[0.8] tracking-[0.04em] text-[clamp(5rem,24vw,15rem)]"
-            style={{ color: INK }}
+            style={{ color: INK, marginTop: "10px" }}
             aria-label="Our gallery"
           >
             {letters.map((letter, i) => (
@@ -327,6 +327,7 @@ function GalleryHero({ onJump }: { onJump: (category: string) => void }) {
                 key={i}
                 aria-hidden="true"
                 className={`inline-block ${i % 2 === 1 ? "text-outline-ink" : ""}`}
+                style={{ color: i % 2 === 0 ? RED : undefined }}
                 initial={reduced ? false : { opacity: 0, y: "0.3em", filter: "blur(8px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.6, delay: 0.18 + i * 0.07 }}
@@ -466,7 +467,7 @@ function CategoryCards({ onSelect }: { onSelect: (category: string) => void }) {
   const [paused, setPaused] = useState(false);
   return (
     <section className={`${TORN_OVERLAP} pb-20 md:pb-24 pt-16 md:pt-24`}>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
@@ -513,7 +514,7 @@ function CategoryCards({ onSelect }: { onSelect: (category: string) => void }) {
       </div>
 
       {/* DESKTOP: grid of category cards */}
-      <motion.div 
+      <motion.div
         className="mx-auto mt-12 hidden max-w-6xl grid-cols-2 gap-5 px-5 sm:grid lg:grid-cols-3"
         initial="hidden"
         whileInView="show"
