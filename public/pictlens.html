@@ -4516,6 +4516,71 @@
     });
   </script>
 
+  <style>
+    /* Hero Zoom and Parallax Effect */
+    .section-home-header {
+      background-image: none !important;
+      position: sticky;
+      top: 0;
+      overflow: hidden !important;
+    }
+    .section-home-header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("/webflow/pictlens/images/gm-hero.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+      transform: scale(var(--hero-zoom, 1)) translateY(var(--hero-parallax, 0px));
+      transform-origin: center center;
+      will-change: transform;
+      pointer-events: none;
+    }
+    @media screen and (max-width: 991px) {
+      .section-home-header::before {
+        background-image: url("/webflow/pictlens/images/gm-hero.jpg");
+      }
+    }
+    .section-home-header > * {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hero = document.querySelector('.section-home-header');
+      if (!hero) return;
+      
+      let ticking = false;
+      function onScrollHero() {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            const heroHeight = window.innerHeight;
+            
+            if (scrollY <= heroHeight * 1.5) {
+              const progress = Math.min(scrollY / heroHeight, 1);
+              const zoom = 1 + (progress * 0.2); // 20% zoom
+              const parallax = progress * 8; // Move down max 8% to avoid clipping edges with 20% zoom
+              
+              hero.style.setProperty('--hero-zoom', zoom);
+              hero.style.setProperty('--hero-parallax', parallax + '%');
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+      
+      window.addEventListener('scroll', onScrollHero, { passive: true });
+      onScrollHero();
+    });
+  </script>
 </body>
 
 </html>
