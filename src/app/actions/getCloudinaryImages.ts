@@ -33,10 +33,10 @@ export async function getAllGalleryImages() {
       let category = "All";
       const folderName = (resource.asset_folder || resource.folder || "").toLowerCase();
       
-      if (folderName.includes("wedding")) category = "Wedding";
+      if (folderName.includes("pre")) category = "Pre Wedding";
+      else if (folderName.includes("wedding")) category = "Wedding";
       else if (folderName.includes("rice")) category = "Rice Ceremony";
       else if (folderName.includes("maternity")) category = "Maternity";
-      else if (folderName.includes("pre")) category = "Pre Wedding";
       else if (folderName.includes("portfolio")) category = "Portfolio";
       else if (folderName.includes("corporate")) category = "Corporate";
       else if (folderName.includes("baby")) category = "Baby Shoot";

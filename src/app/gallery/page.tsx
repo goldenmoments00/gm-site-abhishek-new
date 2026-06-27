@@ -751,7 +751,7 @@ function CategoryCollageModal({
       role="dialog"
       aria-modal="true"
       aria-label={`${title} collage`}
-      className="fixed inset-0 z-50 flex items-end justify-center bg-[#1a1a1a]/85 backdrop-blur-md sm:items-center sm:p-6"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1a1a1a]/85 backdrop-blur-md"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -761,12 +761,12 @@ function CategoryCollageModal({
         animate={{ y: 0, opacity: 1 }}
         exit={reduced ? { opacity: 0 } : { y: 48, opacity: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-t-3xl shadow-2xl sm:max-h-[88vh] sm:rounded-3xl"
+        className="flex h-full w-full max-w-none flex-col overflow-hidden rounded-none shadow-2xl"
         style={{ backgroundColor: CREAM }}
       >
         {/* sticky header */}
         <div
-          className="flex items-center justify-between gap-4 border-b px-5 py-4 sm:px-7"
+          className="flex shrink-0 items-center justify-between gap-4 border-b px-5 py-4 sm:px-7"
           style={{ borderColor: `${INK}14` }}
         >
           <div>
@@ -881,7 +881,7 @@ function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label="Gallery lightbox"
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-[#1a1a1a]/96 backdrop-blur-md"
+      className="fixed inset-0 z-[110] flex items-center justify-center bg-[#1a1a1a]/96 backdrop-blur-md"
       onMouseEnter={() => setIsInteracting(true)}
       onMouseLeave={() => setIsInteracting(false)}
       onFocusCapture={() => setIsInteracting(true)}
