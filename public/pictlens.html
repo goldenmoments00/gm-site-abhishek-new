@@ -280,14 +280,16 @@
       position: relative;
       z-index: 1;
       background-color: #fff6e5;
-      margin-top: -30vw;
+      margin-top: calc(-30vw + 100px);
+      height: 130vh; /* Gives room for a brief sticky effect before the next section glides in */
       /* Pulled up more on desktop to increase overlap and avoid gaps */
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: visible; /* Required for position: sticky to work */
     }
 
     @media screen and (max-width: 767px) {
       .section-slideshow {
-        margin-top: -42vw;
+        margin-top: calc(-42vw + 100px);
         /* Large overlap on smaller screens to cover the bottom torn paper edge */
       }
     }
@@ -491,9 +493,10 @@
 
     /* Visual Stories Slideshow Styles */
     .visual-stories-slideshow {
-      position: relative;
+      position: sticky;
+      top: 0;
       width: 100%;
-      min-height: 100vh;
+      height: 100vh;
       overflow: hidden;
       background: #fff6e5;
     }
@@ -1260,15 +1263,15 @@
     .section-home-portfolio {
       position: relative;
       z-index: 10;
-      margin-top: calc(-16vw - 200px);
+      margin-top: calc(-16vw - 400px);
       /* Deep overlap so slideshow shows through the
                                entire PNG transparent + semi-transparent
                                torn-edge fade zone. */
       background-color: transparent !important;
       background-image: linear-gradient(to bottom,
           rgba(255, 246, 229, 0) 0,
-          rgba(255, 246, 229, 0) calc(16vw + 200px),
-          #fff6e5 calc(16vw + 200px),
+          rgba(255, 246, 229, 0) calc(16vw + 400px),
+          #fff6e5 calc(16vw + 400px),
           #fff6e5 100%) !important;
     }
 
@@ -1377,11 +1380,11 @@
     /* On mobile the grid collapses; pull cards up over the bottom torn edge */
     @media screen and (max-width: 991px) {
       .section-home-portfolio {
-        margin-top: calc(-20vw - 200px);
+        margin-top: calc(-20vw - 400px);
         background-image: linear-gradient(to bottom,
             rgba(255, 246, 229, 0) 0,
-            rgba(255, 246, 229, 0) calc(20vw + 200px),
-            #fff6e5 calc(20vw + 200px),
+            rgba(255, 246, 229, 0) calc(20vw + 400px),
+            #fff6e5 calc(20vw + 400px),
             #fff6e5 100%) !important;
       }
 
@@ -1402,11 +1405,11 @@
 
     @media screen and (max-width: 767px) {
       .section-home-portfolio {
-        margin-top: calc(-24vw - 200px);
+        margin-top: calc(-24vw - 400px);
         background-image: linear-gradient(to bottom,
             rgba(255, 246, 229, 0) 0,
-            rgba(255, 246, 229, 0) calc(24vw + 200px),
-            #fff6e5 calc(24vw + 200px),
+            rgba(255, 246, 229, 0) calc(24vw + 400px),
+            #fff6e5 calc(24vw + 400px),
             #fff6e5 100%) !important;
       }
 
@@ -2652,6 +2655,25 @@
               } else {
                 initSlideshow();
               }
+              
+              // Smooth sticky fullscreen logic
+              const slideshowSection = document.querySelector('.section-slideshow');
+              const curtainWrapper = document.querySelector('.gallery-curtain-wrapper');
+              
+              window.addEventListener('scroll', () => {
+                 if (!slideshowContainer || !slideshowSection) return;
+                 
+                 const childRect = slideshowContainer.getBoundingClientRect();
+                 const sectionRect = slideshowSection.getBoundingClientRect();
+                 
+                 // If the child is sticking (top is at 0) and we haven't scrolled past it
+                 // Using top <= 10 to account for subpixel rendering
+                 if (childRect.top <= 10 && sectionRect.bottom >= (window.innerHeight * 0.5)) {
+                    slideshowSection.style.zIndex = '99999';
+                 } else {
+                    slideshowSection.style.zIndex = '1';
+                 }
+              }, { passive: true });
             })();
           </script>
         </section>
