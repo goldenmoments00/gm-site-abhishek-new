@@ -74,7 +74,7 @@ const galleryImages: GalleryImage[] = [
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&h=1040&fit=crop&crop=faces",
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
     title: "Golden Hour",
     category: "Rice Ceremony",
     description: "Love illuminated by nature's light",
@@ -135,6 +135,87 @@ const galleryImages: GalleryImage[] = [
     w: 800,
     h: 1000,
   },
+  {
+    id: 10,
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
+    title: "Joyful Moments",
+    category: "Rice Ceremony",
+    description: "Capturing the little smiles",
+    w: 900,
+    h: 600,
+  },
+  {
+    id: 11,
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
+    title: "Sweet Innocence",
+    category: "Rice Ceremony",
+    description: "A timeless memory",
+    w: 800,
+    h: 1200,
+  },
+  {
+    id: 12,
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
+    title: "Playful Days",
+    category: "Rice Ceremony",
+    description: "Wonder in their eyes",
+    w: 800,
+    h: 800,
+  },
+  {
+    id: 13,
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
+    title: "Little Blessings",
+    category: "Rice Ceremony",
+    description: "Surrounded by love",
+    w: 1000,
+    h: 700,
+  },
+  {
+    id: 14,
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
+    title: "Tiny Steps",
+    category: "Rice Ceremony",
+    description: "The beginning of everything",
+    w: 800,
+    h: 1000,
+  },
+  {
+    id: 15,
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
+    title: "A Bright Future",
+    category: "Rice Ceremony",
+    description: "Looking ahead with hope",
+    w: 800,
+    h: 1120,
+  },
+  {
+    id: 16,
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
+    title: "Pure Joy",
+    category: "Rice Ceremony",
+    description: "Smiles that melt hearts",
+    w: 960,
+    h: 620,
+  },
+  {
+    id: 17,
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
+    title: "Family Ties",
+    category: "Rice Ceremony",
+    description: "A celebration to remember",
+    w: 800,
+    h: 900,
+  },
+  {
+    id: 18,
+    src: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582695/goldenmoment.in_pre_wed_5_of_10_fzynod.jpg",
+    title: "Golden Memories",
+    category: "Rice Ceremony",
+    description: "Cherished forever",
+    w: 1200,
+    h: 800,
+  },
 ];
 
 const categories = ["All", "Wedding", "Pre Wedding", "Rice Ceremony", "Maternity", "Portfolio", "Corporate"];
@@ -166,6 +247,12 @@ const categoryTagline: Record<string, string> = {
   Maternity: "New Beginnings",
   Portfolio: "Your Best Angles",
   Corporate: "Professional Excellence",
+  "Baby Shoot": "Little Miracles",
+};
+
+const categoryCovers: Record<string, string> = {
+  Wedding: "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782582876/goldenmoment.in_wed_53_of_58_kjffat.jpg",
+  "Pre Wedding": "https://res.cloudinary.com/ddp2ewmc2/image/upload/v1782583708/goldenmoment.in_pre_wedding_7_of_30_b9uhee.jpg",
 };
 
 /** Clean, frameless wedding photos for the hero (parallax + scrolling bars). */
@@ -451,7 +538,7 @@ function CategoryCardItem({
   className?: string;
 }) {
   const imgs = imagesIn(category);
-  const cover = imgs[0]?.src;
+  const cover = categoryCovers[category] || imgs[0]?.src;
   return (
     <button
       type="button"
@@ -930,6 +1017,27 @@ function GalleryContent() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [dynamicLoaded, setDynamicLoaded] = useState(false);
+
+  useEffect(() => {
+    import("@/app/actions/getCloudinaryImages").then((m) => {
+      m.getAllGalleryImages().then((cloudImages) => {
+        if (cloudImages.length > 0) {
+          // Find which categories we successfully loaded from Cloudinary
+          const dynamicCategories = new Set(cloudImages.map(img => img.category));
+          
+          // Keep static images ONLY for categories that don't have Cloudinary images yet
+          const filtered = galleryImages.filter(img => 
+            !dynamicCategories.has(img.category)
+          );
+          
+          galleryImages.length = 0; // Clear array
+          galleryImages.push(...filtered, ...cloudImages);
+          setDynamicLoaded(true);
+        }
+      });
+    });
+  }, []);
 
   useEffect(() => {
     const urlCategory = searchParams.get("category");
