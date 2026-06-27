@@ -447,7 +447,7 @@ export default function PremiumTimelineTestimonials() {
           </div>
 
           {/* Right Column: Active Testimonial */}
-          <div className="w-full flex-1 lg:pl-32 lg:pr-8">
+          <div className="w-full flex-1 lg:pl-[230px] lg:pr-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTestimonial.id}
