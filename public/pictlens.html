@@ -281,10 +281,12 @@
       z-index: 1;
       background-color: #fff6e5;
       margin-top: calc(-30vw + 100px);
-      height: 130vh; /* Gives room for a brief sticky effect before the next section glides in */
+      height: 130vh;
+      /* Gives room for a brief sticky effect before the next section glides in */
       /* Pulled up more on desktop to increase overlap and avoid gaps */
       overflow-x: hidden;
-      overflow-y: visible; /* Required for position: sticky to work */
+      overflow-y: visible;
+      /* Required for position: sticky to work */
     }
 
     @media screen and (max-width: 767px) {
@@ -1263,15 +1265,15 @@
     .section-home-portfolio {
       position: relative;
       z-index: 10;
-      margin-top: calc(-16vw - 400px);
+      margin-top: calc(-16vw - 600px);
       /* Deep overlap so slideshow shows through the
                                entire PNG transparent + semi-transparent
                                torn-edge fade zone. */
       background-color: transparent !important;
       background-image: linear-gradient(to bottom,
           rgba(255, 246, 229, 0) 0,
-          rgba(255, 246, 229, 0) calc(16vw + 400px),
-          #fff6e5 calc(16vw + 400px),
+          rgba(255, 246, 229, 0) calc(16vw + 600px),
+          #fff6e5 calc(16vw + 600px),
           #fff6e5 100%) !important;
     }
 
@@ -1380,11 +1382,11 @@
     /* On mobile the grid collapses; pull cards up over the bottom torn edge */
     @media screen and (max-width: 991px) {
       .section-home-portfolio {
-        margin-top: calc(-20vw - 400px);
+        margin-top: calc(-20vw - 600px);
         background-image: linear-gradient(to bottom,
             rgba(255, 246, 229, 0) 0,
-            rgba(255, 246, 229, 0) calc(20vw + 400px),
-            #fff6e5 calc(20vw + 400px),
+            rgba(255, 246, 229, 0) calc(20vw + 600px),
+            #fff6e5 calc(20vw + 600px),
             #fff6e5 100%) !important;
       }
 
@@ -1405,11 +1407,11 @@
 
     @media screen and (max-width: 767px) {
       .section-home-portfolio {
-        margin-top: calc(-24vw - 400px);
+        margin-top: calc(-24vw - 600px);
         background-image: linear-gradient(to bottom,
             rgba(255, 246, 229, 0) 0,
-            rgba(255, 246, 229, 0) calc(24vw + 400px),
-            #fff6e5 calc(24vw + 400px),
+            rgba(255, 246, 229, 0) calc(24vw + 600px),
+            #fff6e5 calc(24vw + 600px),
             #fff6e5 100%) !important;
       }
 
@@ -1427,6 +1429,27 @@
         font-size: 15vw !important;
       }
     }
+    .services-footer-paper {
+      position: relative;
+      width: 100vw;
+      height: 53.4vw;
+      background-image: url("/webflow/pictlens/images/gallery-header-bg.png");
+      background-size: 110% 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      z-index: 20; /* Higher than map section (10) */
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      margin-top: calc(-6vw - 450px); /* Moved upwards by 150px from -300px */
+      margin-bottom: -15vw; /* Pull the coverage map up slightly under the paper */
+    }
+    @media screen and (max-width: 767px) {
+      .services-footer-paper {
+        height: 110vw;
+      }
+    }
+
   </style>
 
   <style>
@@ -2655,24 +2678,24 @@
               } else {
                 initSlideshow();
               }
-              
+
               // Smooth sticky fullscreen logic
               const slideshowSection = document.querySelector('.section-slideshow');
               const curtainWrapper = document.querySelector('.gallery-curtain-wrapper');
-              
+
               window.addEventListener('scroll', () => {
-                 if (!slideshowContainer || !slideshowSection) return;
-                 
-                 const childRect = slideshowContainer.getBoundingClientRect();
-                 const sectionRect = slideshowSection.getBoundingClientRect();
-                 
-                 // If the child is sticking (top is at 0) and we haven't scrolled past it
-                 // Using top <= 10 to account for subpixel rendering
-                 if (childRect.top <= 10 && sectionRect.bottom >= (window.innerHeight * 0.5)) {
-                    slideshowSection.style.zIndex = '99999';
-                 } else {
-                    slideshowSection.style.zIndex = '1';
-                 }
+                if (!slideshowContainer || !slideshowSection) return;
+
+                const childRect = slideshowContainer.getBoundingClientRect();
+                const sectionRect = slideshowSection.getBoundingClientRect();
+
+                // If the child is sticking (top is at 0) and we haven't scrolled past it
+                // Using top <= 10 to account for subpixel rendering
+                if (childRect.top <= 10 && sectionRect.bottom >= (window.innerHeight * 0.5)) {
+                  slideshowSection.style.zIndex = '99999';
+                } else {
+                  slideshowSection.style.zIndex = '1';
+                }
               }, { passive: true });
             })();
           </script>
@@ -4084,6 +4107,9 @@
             }
           })();
         </script>
+        
+        <!-- Bottom torn paper separator for the Services section -->
+        <div class="services-footer-paper"></div>
       </section>
       <section class="section-coverage-map" style="position: relative; z-index: 10; background-color: #fff6e5;">
         <style>
@@ -4538,6 +4564,7 @@
       top: 0;
       overflow: hidden !important;
     }
+
     .section-home-header::before {
       content: "";
       position: absolute;
@@ -4554,12 +4581,14 @@
       will-change: transform;
       pointer-events: none;
     }
+
     @media screen and (max-width: 991px) {
       .section-home-header::before {
         background-image: url("/webflow/pictlens/images/gm-hero.jpg");
       }
     }
-    .section-home-header > * {
+
+    .section-home-header>* {
       position: relative;
       z-index: 1;
     }
@@ -4569,19 +4598,19 @@
     document.addEventListener("DOMContentLoaded", function () {
       const hero = document.querySelector('.section-home-header');
       if (!hero) return;
-      
+
       let ticking = false;
       function onScrollHero() {
         if (!ticking) {
           window.requestAnimationFrame(() => {
             const scrollY = window.scrollY;
             const heroHeight = window.innerHeight;
-            
+
             if (scrollY <= heroHeight * 1.5) {
               const progress = Math.min(scrollY / heroHeight, 1);
               const zoom = 1 + (progress * 0.2); // 20% zoom
               const parallax = progress * 8; // Move down max 8% to avoid clipping edges with 20% zoom
-              
+
               hero.style.setProperty('--hero-zoom', zoom);
               hero.style.setProperty('--hero-parallax', parallax + '%');
             }
@@ -4590,7 +4619,7 @@
           ticking = true;
         }
       }
-      
+
       window.addEventListener('scroll', onScrollHero, { passive: true });
       onScrollHero();
     });
