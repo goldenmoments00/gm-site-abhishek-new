@@ -494,7 +494,7 @@ function CategoryCards({ onSelect }: { onSelect: (category: string) => void }) {
   // Pause the auto-scroll while touched/hovered so cards stay tappable.
   const [paused, setPaused] = useState(false);
   return (
-    <section id="collection" className={`${TORN_OVERLAP} pb-20 md:pb-24 pt-16 md:pt-24`}>
+    <section id="collection" className="pb-20 md:pb-24 pt-16 md:pt-24">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
