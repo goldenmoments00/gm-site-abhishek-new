@@ -17,14 +17,14 @@ export default function FooterIframe() {
         window.parent.postMessage({ type: 'footerHeight', height }, '*');
       }
     };
-    
+
     reportHeight();
     window.addEventListener('resize', reportHeight);
-    
+
     // Report height periodically for the first few seconds to account for images/fonts loading
     const interval = setInterval(reportHeight, 200);
     setTimeout(() => clearInterval(interval), 2000);
-    
+
     return () => {
       window.removeEventListener('resize', reportHeight);
       clearInterval(interval);

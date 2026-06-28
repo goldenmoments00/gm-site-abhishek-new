@@ -156,7 +156,7 @@ export default function PillNavbar() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 md:hidden"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 md:hidden"
             onClick={() => setMobileMenuOpen(true)}
           >
             <Menu size={20} className="text-[#1a1a1a]" />

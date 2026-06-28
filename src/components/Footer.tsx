@@ -8,6 +8,9 @@ import {
   Facebook,
   Youtube,
   MessageCircle as Whatsapp,
+  Mail,
+  CalendarDays,
+  Check
 } from "lucide-react";
 
 const MagneticButton = ({
@@ -51,7 +54,7 @@ const MagneticButton = ({
       style={{ x: springX, y: springY }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="relative px-8 py-3 rounded-full border border-white/30 text-[#FFF6E5] font-medium text-sm lg:text-base tracking-wide overflow-hidden group w-full sm:w-auto"
+      className="relative px-8 py-2.5 lg:py-3 rounded-full border border-white/30 text-[#FFF6E5] font-medium text-sm lg:text-base tracking-wide overflow-hidden group w-full sm:w-auto"
     >
       <div className="absolute inset-0 bg-[#FFF6E5] transform scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100 z-0"></div>
       <span className="relative z-10 transition-colors duration-500 group-hover:text-[#8a1212]">
@@ -101,7 +104,7 @@ const MagneticLink = ({
       style={{ x: springX, y: springY }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="relative px-8 py-3 rounded-full border border-white/30 text-[#FFF6E5] font-medium text-sm lg:text-base tracking-wide overflow-hidden group w-full sm:w-auto text-center block"
+      className="relative px-8 py-2.5 lg:py-3 rounded-full border border-white/30 text-[#FFF6E5] font-medium text-sm lg:text-base tracking-wide overflow-hidden group w-full sm:w-auto text-center block"
     >
       <div className="absolute inset-0 bg-[#FFF6E5] transform scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100 z-0"></div>
       <span className="relative z-10 transition-colors duration-500 group-hover:text-[#8a1212]">
@@ -132,8 +135,8 @@ const Footer = () => {
   ];
 
   return (
-    <footer 
-      className="relative w-full text-[#FFF6E5] overflow-hidden pt-36 pb-8 lg:pt-48 lg:pb-12 flex flex-col items-center justify-center bg-transparent"
+    <footer
+      className="relative w-full text-[#FFF6E5] overflow-hidden pt-16 pb-6 lg:pt-48 lg:pb-12 flex flex-col items-center justify-center bg-transparent"
       style={{
         backgroundImage: "url('/webflow/pictlens/images/footer-bg-pc.png')",
         backgroundSize: "cover",
@@ -149,20 +152,20 @@ const Footer = () => {
         className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center w-full"
       >
         {/* Headings */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#FFF6E5] mb-4 leading-tight">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#FFF6E5] mb-2 lg:mb-4 leading-tight">
           Let&apos;s Create Something Beautiful Together
         </h2>
-        <p className="text-sm md:text-base text-[#FFF6E5]/80 max-w-2xl mb-8 leading-relaxed">
+        <p className="hidden lg:block text-[13px] md:text-base text-[#FFF6E5]/80 max-w-2xl mb-6 lg:mb-8 leading-relaxed">
           Planning your wedding? We&apos;d love to hear your story and craft timeless memories that last forever.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="mb-8 w-full flex flex-col items-center">
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto justify-center">
+        {/* CTA Buttons - Desktop Only */}
+        <div className="hidden lg:flex flex-col items-center mb-8 w-full">
+          <div className="flex flex-row gap-6 w-auto justify-center">
             <MagneticLink href="https://booking.goldenmoment.in/">
               Book Us
             </MagneticLink>
-            
+
             <MagneticButton
               onClick={handleEmailClick}
               onDoubleClick={handleEmailDoubleClick}
@@ -170,14 +173,39 @@ const Footer = () => {
               {copied ? "Copied!" : "Mail Us"}
             </MagneticButton>
           </div>
-          
-          <p className="text-[10px] sm:text-xs text-[#FFF6E5]/60 mt-4 uppercase tracking-widest text-center">
+
+          <p className="text-[10px] text-[#FFF6E5]/60 mt-4 uppercase tracking-widest text-center">
             Click Mail Us to copy • Double click to open mail client
           </p>
         </div>
 
-        {/* Social Icons */}
-        <div className="flex gap-4 mb-10">
+
+        {/* Social Icons & Mobile CTA Row */}
+        <div className="flex flex-wrap justify-center gap-4 mb-6 lg:mb-10">
+          {/* Mobile Only: Book Us Icon */}
+          <motion.a
+            href="https://booking.goldenmoment.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.15, y: -5 }}
+            whileTap={{ scale: 0.95 }}
+            className="lg:hidden w-9 h-9 rounded-full border border-white/30 text-[#FFF6E5] flex items-center justify-center shadow-lg transition-all hover:bg-[#FFF6E5] hover:text-[#8a1212] hover:shadow-white/30"
+          >
+            <CalendarDays size={20} />
+          </motion.a>
+
+          {/* Mobile Only: Mail Us Icon */}
+          <motion.button
+            onClick={handleEmailClick}
+            onDoubleClick={handleEmailDoubleClick}
+            whileHover={{ scale: 1.15, y: -5 }}
+            whileTap={{ scale: 0.95 }}
+            className="lg:hidden w-9 h-9 rounded-full border border-white/30 text-[#FFF6E5] flex items-center justify-center shadow-lg transition-all hover:bg-[#FFF6E5] hover:text-[#8a1212] hover:shadow-white/30"
+          >
+            {copied ? <Check size={20} /> : <Mail size={20} />}
+          </motion.button>
+
+          {/* Social Links */}
           {socialLinks.map((social, idx) => (
             <motion.a
               key={idx}
@@ -186,17 +214,17 @@ const Footer = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.15, y: -5 }}
               whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 rounded-full border border-white/30 text-[#FFF6E5] flex items-center justify-center shadow-lg transition-all hover:bg-[#FFF6E5] hover:text-[#8a1212] hover:shadow-white/30"
+              className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-white/30 text-[#FFF6E5] flex items-center justify-center shadow-lg transition-all hover:bg-[#FFF6E5] hover:text-[#8a1212] hover:shadow-white/30"
             >
-              {social.icon}
+              {React.cloneElement(social.icon as React.ReactElement, { size: 20 })}
             </motion.a>
           ))}
         </div>
 
         {/* Footer Bottom */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-between border-t border-white/10 pt-6 gap-4 text-[10px] sm:text-xs text-[#FFF6E5]/60 uppercase tracking-widest font-medium">
+        <div className="w-full flex flex-col md:flex-row items-center justify-between border-t border-white/10 pt-2 lg:pt-6 gap-3 lg:gap-4 text-[9px] lg:text-[10px] sm:text-xs text-[#FFF6E5]/60 uppercase tracking-widest font-medium">
           <p>© 2026 Golden Moments. All Rights Reserved.</p>
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8">
             <a href="/terms" target="_top" className="hover:text-white transition-colors">
               Terms & Conditions
             </a>
@@ -211,6 +239,11 @@ const Footer = () => {
             </a>
           </div>
         </div>
+
+        {/* Mobile Only text moved to absolute bottom */}
+        <p className="lg:hidden text-[13px] text-[#FFF6E5]/80 max-w-2xl mt-6 leading-relaxed text-center px-4">
+          Planning your wedding? We&apos;d love to hear your story and craft timeless memories that last forever.
+        </p>
       </motion.div>
     </footer>
   );
