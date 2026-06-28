@@ -1081,13 +1081,22 @@
         visibility: visible;
       }
 
-      .slideshow-bg-image {
-        position: relative;
+      .slideshow-mobile-wrapper {
+        display: grid;
+        grid-template-areas: "overlap";
         width: 85%;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .slideshow-bg-image {
+        grid-area: overlap;
+        position: relative;
+        width: 100%;
         height: auto;
         min-height: 50vh;
         aspect-ratio: 920 / 1180;
-        border-radius: 8px;
         object-fit: cover;
       }
 
@@ -1099,23 +1108,28 @@
         position: relative;
         padding: 1.5rem;
         max-width: 100%;
-        width: 90%;
+        width: 100%;
         text-align: center;
         transform: none !important;
         top: auto !important;
         left: auto !important;
         right: auto !important;
         bottom: auto !important;
+        box-sizing: border-box;
       }
 
       .slideshow-content.mobile-title {
-        order: -1;
-        padding-bottom: 1rem;
+        grid-area: overlap;
+        align-self: start;
+        padding-top: 2rem;
+        z-index: 5;
       }
 
       .slideshow-content.mobile-subtitle {
-        order: 1;
-        padding-top: 1rem;
+        grid-area: overlap;
+        align-self: end;
+        padding-bottom: 2rem;
+        z-index: 5;
       }
 
       .slideshow-title {
@@ -1495,12 +1509,24 @@
 
     /* On mobile the grid collapses; pull cards up over the bottom torn edge */
     @media screen and (max-width: 991px) {
+      /* Force white text and corners when overlaying images on mobile */
+      .section-home-portfolio .portfolio-content-wrap .client-name,
+      .section-home-portfolio .portfolio-content-wrap .portfolio-text {
+        color: #fff !important;
+      }
+      .section-home-portfolio .portfolio-content .corner-wrap div {
+        background-color: #fff !important;
+      }
+      .section-home-portfolio .portfolio-content-wrap .portfolio-text.text-color-secondary {
+        color: rgba(255, 255, 255, 0.7) !important;
+      }
+
       .section-home-portfolio {
-        margin-top: calc(-20vw - 600px);
+        margin-top: calc(-24vw + 50px);
         background-image: linear-gradient(to bottom,
             rgba(255, 246, 229, 0) 0,
-            rgba(255, 246, 229, 0) calc(20vw + 600px),
-            #fff6e5 calc(20vw + 600px),
+            rgba(255, 246, 229, 0) calc(24vw - 50px),
+            #fff6e5 calc(24vw - 50px),
             #fff6e5 100%) !important;
       }
 
@@ -2712,12 +2738,14 @@
                 if (isMobile()) {
                   return `
                     <div class="slideshow-slide ${index === 0 ? "active" : ""}" data-index="${index}">
-                      <div class="slideshow-content mobile-title">
-                        <h2 class="slideshow-title">${titleLetters}</h2>
-                      </div>
-                      <img ${imgAttrs} />
-                      <div class="slideshow-content mobile-subtitle">
-                        <p class="slideshow-subtitle">${subtitleLetters}</p>
+                      <div class="slideshow-mobile-wrapper">
+                        <img ${imgAttrs} />
+                        <div class="slideshow-content mobile-title">
+                          <h2 class="slideshow-title">${titleLetters}</h2>
+                        </div>
+                        <div class="slideshow-content mobile-subtitle">
+                          <p class="slideshow-subtitle">${subtitleLetters}</p>
+                        </div>
                       </div>
                     </div>
                   `;
@@ -4245,7 +4273,7 @@
             }
           }
         </style>
-        <iframe src="/coverage-map?embed=true" class="coverage-iframe" title="Coverage Map"></iframe>
+        <iframe src="/coverage-map?embed=true&v=4" class="coverage-iframe" title="Coverage Map"></iframe>
       </section>
       <div id="premium-testimonials-root"></div>
       <section class="call-to-action">
@@ -4632,7 +4660,7 @@
           icon.style.opacity = opacity;
         });
       });
-        });
+    });
   </script>
 
   <script>
@@ -4671,7 +4699,7 @@
 
       window.addEventListener('scroll', updateComp04, { passive: true });
       updateComp04();
-        });
+    });
   </script>
 
   <style>
@@ -4747,7 +4775,7 @@
 
       window.addEventListener('scroll', onScrollHero, { passive: true });
       onScrollHero();
-        });
+    });
   </script>
 
   <script>
@@ -4763,9 +4791,11 @@
           type: 'iframe-scroll',
           scrollY: currentScrollY,
           direction: direction
-      }, '*');
-      ssive: true });
-        });
+        }, '*');
+        ssive: true
+      });
+    });
   </script>
 </body>
+
 </html>

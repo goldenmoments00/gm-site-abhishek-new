@@ -166,6 +166,15 @@ export default function PremiumTimelineTestimonials() {
     return () => clearInterval(interval);
   }, [isHovered, total]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const getRelativeIndex = (index: number) => {
     let diff = index - activeIndex;
     if (diff < -total / 2) diff += total;
@@ -173,13 +182,32 @@ export default function PremiumTimelineTestimonials() {
     return diff;
   };
 
+  const getMobileAvatarProps = (relativeIndex: number) => {
+    if (relativeIndex === 0) {
+      return { left: "50%", top: "70%", x: "-50%", y: "-50%", scale: 1.4, opacity: 1, filter: "blur(0px)", zIndex: 30, grayscale: "0%" };
+    } else if (relativeIndex === -1) {
+      return { left: "25%", top: "45%", x: "-50%", y: "-50%", scale: 0.7, opacity: 0.8, filter: "blur(1px)", zIndex: 20, grayscale: "50%" };
+    } else if (relativeIndex === 1) {
+      return { left: "75%", top: "45%", x: "-50%", y: "-50%", scale: 0.7, opacity: 0.8, filter: "blur(1px)", zIndex: 20, grayscale: "50%" };
+    } else if (relativeIndex === -2) {
+      return { left: "5%", top: "25%", x: "-50%", y: "-50%", scale: 0.4, opacity: 0.5, filter: "blur(2px)", zIndex: 10, grayscale: "80%" };
+    } else if (relativeIndex === 2) {
+      return { left: "95%", top: "25%", x: "-50%", y: "-50%", scale: 0.4, opacity: 0.5, filter: "blur(2px)", zIndex: 10, grayscale: "80%" };
+    } else {
+      return { left: relativeIndex < 0 ? "-10%" : "110%", top: "10%", x: "-50%", y: "-50%", scale: 0.2, opacity: 0, filter: "blur(5px)", zIndex: 0, grayscale: "100%" };
+    }
+  };
+
   // Avatar positions for the curved timeline
   const getAvatarProps = (relativeIndex: number) => {
+    if (isMobile) return getMobileAvatarProps(relativeIndex);
+
     if (relativeIndex === 0) {
       return {
         top: "50%",
         y: "-50%",
         x: 30,
+        left: "40px",
         scale: 1.6,
         opacity: 1,
         filter: "blur(0px)",
@@ -191,6 +219,7 @@ export default function PremiumTimelineTestimonials() {
         top: "25%",
         y: "-50%",
         x: 13.75,
+        left: "40px",
         scale: 0.8,
         opacity: 0.6,
         filter: "blur(1px)",
@@ -202,6 +231,7 @@ export default function PremiumTimelineTestimonials() {
         top: "75%",
         y: "-50%",
         x: 13.75,
+        left: "40px",
         scale: 0.8,
         opacity: 0.6,
         filter: "blur(1px)",
@@ -213,6 +243,7 @@ export default function PremiumTimelineTestimonials() {
         top: "5%",
         y: "-50%",
         x: -22.65,
+        left: "40px",
         scale: 0.5,
         opacity: 0.3,
         filter: "blur(2px)",
@@ -224,6 +255,7 @@ export default function PremiumTimelineTestimonials() {
         top: "95%",
         y: "-50%",
         x: -22.65,
+        left: "40px",
         scale: 0.5,
         opacity: 0.3,
         filter: "blur(2px)",
@@ -235,6 +267,7 @@ export default function PremiumTimelineTestimonials() {
         top: "-10%",
         y: "-50%",
         x: -64,
+        left: "40px",
         scale: 0.3,
         opacity: 0,
         filter: "blur(5px)",
@@ -246,6 +279,7 @@ export default function PremiumTimelineTestimonials() {
         top: "110%",
         y: "-50%",
         x: -64,
+        left: "40px",
         scale: 0.3,
         opacity: 0,
         filter: "blur(5px)",
@@ -317,34 +351,58 @@ export default function PremiumTimelineTestimonials() {
         {/* Content Layout */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
           {/* Left Column: Timeline */}
-          <div className="w-full lg:w-[250px] shrink-0 relative h-[400px] lg:h-[500px] flex justify-center lg:justify-start lg:pl-4">
+          <div className="w-full lg:w-[250px] shrink-0 relative h-[250px] lg:h-[500px] flex justify-center lg:justify-start lg:pl-4">
             {/* Avatars Container */}
             <div
               ref={containerRef}
               className="relative w-full h-full"
             >
               {/* SVG Curve */}
-              <svg
-                className="absolute left-1/2 lg:left-10 top-0 w-[150px] h-full -ml-[75px] lg:ml-0 pointer-events-none"
-                viewBox="0 0 150 500"
-                preserveAspectRatio="none"
-              >
-                <defs>
-                  <linearGradient id="timeline-fade" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#8a1212" stopOpacity="0" />
-                    <stop offset="20%" stopColor="#8a1212" stopOpacity="0.3" />
-                    <stop offset="50%" stopColor="#8a1212" stopOpacity="1" />
-                    <stop offset="80%" stopColor="#8a1212" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#8a1212" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M 10 0 Q 140 250 10 500"
-                  fill="none"
-                  stroke="url(#timeline-fade)"
-                  strokeWidth="2.5"
-                />
-              </svg>
+              {isMobile ? (
+                <svg
+                  className="absolute top-0 left-0 w-full h-[250px] pointer-events-none"
+                  viewBox="0 0 300 250"
+                  preserveAspectRatio="none"
+                >
+                  <defs>
+                    <linearGradient id="timeline-fade-mobile" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#8a1212" stopOpacity="0" />
+                      <stop offset="20%" stopColor="#8a1212" stopOpacity="0.3" />
+                      <stop offset="50%" stopColor="#8a1212" stopOpacity="1" />
+                      <stop offset="80%" stopColor="#8a1212" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="#8a1212" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M 15 62.5 Q 150 175 285 62.5"
+                    fill="none"
+                    stroke="url(#timeline-fade-mobile)"
+                    strokeWidth="2.5"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="absolute left-10 top-0 w-[150px] h-full pointer-events-none"
+                  viewBox="0 0 150 500"
+                  preserveAspectRatio="none"
+                >
+                  <defs>
+                    <linearGradient id="timeline-fade" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#8a1212" stopOpacity="0" />
+                      <stop offset="20%" stopColor="#8a1212" stopOpacity="0.3" />
+                      <stop offset="50%" stopColor="#8a1212" stopOpacity="1" />
+                      <stop offset="80%" stopColor="#8a1212" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="#8a1212" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M 10 0 Q 140 250 10 500"
+                    fill="none"
+                    stroke="url(#timeline-fade)"
+                    strokeWidth="2.5"
+                  />
+                </svg>
+              )}
 
               {testimonials.map((testimonial, index) => {
                 const relativeIndex = getRelativeIndex(index);
@@ -354,10 +412,11 @@ export default function PremiumTimelineTestimonials() {
                   <motion.div
                     key={testimonial.id}
                     data-index={index}
-                    className="absolute left-1/2 lg:left-10 cursor-pointer -ml-[75px] lg:ml-0 flex items-center gap-3"
+                    className={`absolute cursor-pointer flex ${isMobile ? 'flex-col items-center' : 'items-center gap-3'}`}
                     animate={{
                       top: props.top,
                       y: props.y,
+                      left: props.left,
                       x: props.x,
                       zIndex: props.zIndex,
                     }}
@@ -371,7 +430,7 @@ export default function PremiumTimelineTestimonials() {
                     }}
                   >
                     <motion.div
-                      className="shrink-0 relative w-[90px] h-[90px]"
+                      className="shrink-0 relative w-[80px] h-[80px] lg:w-[90px] lg:h-[90px]"
                       animate={{
                         scale: props.scale,
                         filter: props.filter,
@@ -401,21 +460,25 @@ export default function PremiumTimelineTestimonials() {
 
                     {/* Client Name and Rating */}
                     <motion.div
-                      className="flex flex-col"
-                      animate={{
+                      className={isMobile ? "absolute top-[100%] mt-8 bg-white/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-gray-100 flex flex-col items-center min-w-max shadow-sm" : "flex flex-col"}
+                      animate={isMobile ? {
+                        opacity: relativeIndex === 0 ? 1 : 0,
+                        scale: relativeIndex === 0 ? 1 : 0.8,
+                        y: relativeIndex === 0 ? 0 : -10,
+                      } : {
                         scale: props.scale,
                         opacity: props.opacity,
                         filter: props.filter,
                         x: (90 * props.scale - 90) / 2,
                       }}
                       transition={{ duration: 0.6, ease: "easeInOut" }}
-                      style={{ originX: 0 }}
+                      style={{ originX: isMobile ? 0.5 : 0, pointerEvents: (isMobile && relativeIndex !== 0) ? 'none' : 'auto' }}
                     >
-                      <div className="font-plus-jakarta-sans font-bold text-[12px] text-[#111111] whitespace-nowrap flex items-center gap-1.5">
+                      <div className="font-plus-jakarta-sans font-bold text-[10px] lg:text-[12px] text-[#111111] whitespace-nowrap flex items-center gap-1.5">
                         {testimonial.coupleName}
                         {testimonial.platform === 'google' && (
                           <a href="https://g.page/r/CUxboF1luRZVEAE/review" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="hover:scale-110 transition-transform flex items-center">
-                            <svg className="w-3 h-3 shrink-0" viewBox="0 0 24 24">
+                            <svg className="w-2.5 h-2.5 lg:w-3 lg:h-3 shrink-0" viewBox="0 0 24 24">
                               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                               <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
                               <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
@@ -425,17 +488,17 @@ export default function PremiumTimelineTestimonials() {
                         )}
                         {testimonial.platform === 'facebook' && (
                           <a href="https://www.facebook.com/goldenmoment.in/reviews" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="hover:scale-110 transition-transform flex items-center">
-                            <svg className="w-3 h-3 shrink-0 text-[#1877F2] fill-current" viewBox="0 0 24 24">
+                            <svg className="w-2.5 h-2.5 lg:w-3 lg:h-3 shrink-0 text-[#1877F2] fill-current" viewBox="0 0 24 24">
                               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                             </svg>
                           </a>
                         )}
                       </div>
                       <div className="flex items-center gap-1 mt-0.5">
-                        <svg className="w-3 h-3 text-[#34A853] fill-current" viewBox="0 0 24 24">
+                        <svg className="w-2.5 h-2.5 lg:w-3 lg:h-3 text-[#34A853] fill-current" viewBox="0 0 24 24">
                           <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                         </svg>
-                        <span className="text-[9px] text-gray-500 font-plus-jakarta-sans whitespace-nowrap">
+                        <span className="text-[8px] lg:text-[9px] text-gray-500 font-plus-jakarta-sans whitespace-nowrap">
                           {testimonial.rating}.0 • {testimonial.location}
                         </span>
                       </div>
@@ -460,12 +523,12 @@ export default function PremiumTimelineTestimonials() {
                 {/* Review Elements Removed as Requested */}
 
                 {/* Review */}
-                <p className="font-mono text-[19px] leading-[1.9] text-gray-800 mb-10 max-w-[1070px]">
+                <p className="font-mono text-[14px] leading-[1.35] tracking-tighter [word-spacing:-2px] lg:[word-spacing:normal] lg:text-[19px] lg:leading-[1.9] lg:tracking-normal text-gray-800 mb-10 max-w-[1070px]">
                   {activeTestimonial.review}
                 </p>
 
-                {/* Author Info */}
-                <div className="flex flex-col gap-1">
+                {/* Author Info - Hidden on mobile since it's attached to avatar */}
+                <div className="hidden lg:flex flex-col gap-1">
                   <h4 className="font-plus-jakarta-sans font-sans font-bold text-lg tracking-wide text-[#111111] flex items-center gap-2 justify-center lg:justify-start">
                     {activeTestimonial.coupleName}
                     {activeTestimonial.platform === 'google' && (

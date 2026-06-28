@@ -67,45 +67,86 @@ export default function CoverageMap2D() {
 
   return (
     <section 
-      className="w-full min-h-screen bg-[#fff6e5] relative overflow-hidden flex items-center py-16"
+      className="w-full min-h-screen bg-[#fff6e5] relative overflow-hidden flex flex-col justify-center py-8 lg:py-16"
       onMouseMove={handleMouseMove}
     >
+      {/* Mobile Infinite Marquee Version - Moved to top */}
+      <div className="flex lg:hidden w-full relative mb-4 overflow-hidden pt-4">
+        {/* Subtle fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#fff6e5] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#fff6e5] to-transparent z-10 pointer-events-none" />
+        
+        <motion.div 
+          className="flex flex-row gap-6 w-max"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ ease: "linear", duration: 15, repeat: Infinity }}
+        >
+          {[
+            { icon: Camera, val: 800, suffix: "+", text: "Weddings Captured" },
+            { icon: Star, val: 10, suffix: "+", text: "Years Experience" },
+            { icon: MapPin, val: 10, suffix: "", text: "Major Coverage Regions" },
+            { icon: Users, val: 1500, suffix: "+", text: "Happy Clients" },
+            // Duplicated for seamless loop
+            { icon: Camera, val: 800, suffix: "+", text: "Weddings Captured" },
+            { icon: Star, val: 10, suffix: "+", text: "Years Experience" },
+            { icon: MapPin, val: 10, suffix: "", text: "Major Coverage Regions" },
+            { icon: Users, val: 1500, suffix: "+", text: "Happy Clients" },
+          ].map((item, i) => (
+            <div 
+              key={i} 
+              className="flex flex-row items-center justify-start text-left gap-3 shrink-0 py-2"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#D90429]/10 flex items-center justify-center text-[#D90429] shrink-0">
+                <item.icon className="w-4 h-4 stroke-[2]" />
+              </div>
+              <span className="text-[11px] sm:text-xs uppercase tracking-[0.15em] text-[#1a1a1a]/80 font-medium leading-tight whitespace-nowrap">
+                <AnimatedNumber end={item.val} suffix={item.suffix} /> {item.text}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
       <div className="container mx-auto px-4 max-w-[1400px] relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
         
         {/* Left Column - Content */}
-        <div className="lg:col-span-4 flex flex-col gap-8">
+        <div className="lg:col-span-4 flex flex-col gap-8 order-1 lg:order-1 relative z-20 mt-4 lg:mt-0">
           
-          <div className="flex flex-col animate-in fade-in slide-in-from-bottom-5 duration-700">
+          <div className="flex flex-col items-start lg:items-start animate-in fade-in slide-in-from-bottom-5 duration-700 w-full pl-8 lg:pl-0">
             <div 
-              className="flex items-center gap-3 italic text-2xl lg:text-[2rem] text-gray-800 mb-[-1rem] pl-2 z-10" 
+              className="flex flex-wrap justify-start lg:justify-start items-center gap-1.5 lg:gap-3 italic text-[1.2rem] lg:text-[2rem] text-gray-800 mb-[-0.25rem] lg:mb-[-1rem] pr-0 lg:pr-0 lg:pl-2 z-10" 
               style={{ fontFamily: 'var(--font-nyght-serif)' }}
             >
-              <span>Capturing</span>
+              <span className="mt-2 lg:mt-0">Capturing</span>
               <motion.span 
-                className="text-[#D90429] text-4xl lg:text-6xl mt-1 lg:mt-2 inline-block origin-center" 
-                style={{ fontFamily: "'Alex Brush', cursive", fontStyle: "normal" }}
+                className="text-[#D90429] text-[2.25rem] lg:text-6xl mt-0.5 lg:mt-2 inline-block origin-center" 
+                style={{ fontFamily: "'Alex Brush', cursive", fontStyle: "normal", lineHeight: 1 }}
                 animate={{ scale: [1, 1.15, 1, 1.15, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
               >
                 Love
               </motion.span>
-              <span>Across</span>
+              <span className="inline lg:inline mt-2 lg:mt-0">Across</span>
             </div>
-            <h2 
-              className="text-[#1a1a1a] text-[8rem] lg:text-[14rem] font-bold tracking-normal leading-[0.85] uppercase" 
-              style={{ fontFamily: 'var(--font-morganite)' }}
-            >
-              India
-            </h2>
+            <div className="flex items-end justify-start lg:justify-start gap-0 lg:gap-3 pr-0 lg:pr-0 mt-0 lg:mt-0 relative z-0">
+               <span className="hidden lg:hidden italic text-[1.75rem] text-gray-800 pb-2 sm:pb-3" style={{ fontFamily: 'var(--font-nyght-serif)' }}>Across</span>
+               <h2 
+                 className="text-[#1a1a1a] text-[6.5rem] sm:text-[8rem] lg:text-[14rem] font-bold tracking-normal lg:tracking-normal leading-[0.8] lg:leading-[0.85] uppercase origin-bottom" 
+                 style={{ fontFamily: 'var(--font-morganite)' }}
+               >
+                 India
+               </h2>
+            </div>
             
-            <p className="mt-8 text-gray-500 text-sm leading-relaxed max-w-sm">
+            <p className="mt-1 lg:mt-8 text-gray-500 text-[11px] lg:text-sm leading-snug lg:leading-relaxed max-w-[260px] lg:max-w-sm text-left lg:text-left mx-0 lg:mx-0 px-0 lg:px-0">
               From the north to the east, we capture timeless emotions in the most beautiful stories across India.
             </p>
           </div>
 
           {/* Stats Cards */}
+          {/* Desktop Version */}
           <motion.div 
-            className="flex flex-col gap-4 max-w-[320px] mt-4 perspective-[1000px]"
+            className="hidden lg:flex flex-col gap-4 max-w-[320px] mt-4 perspective-[1000px]"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-50px" }}
@@ -123,12 +164,12 @@ export default function CoverageMap2D() {
                 show: { opacity: 1, rotateX: 0, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
               }}
               style={{ transformOrigin: "top center" }}
-              className="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(217,4,41,0.08)] transition-shadow cursor-pointer"
+              className="bg-white rounded-2xl p-4 flex flex-row items-center justify-start gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(217,4,41,0.08)] transition-shadow cursor-pointer"
             >
               <div className="w-10 h-10 rounded-full bg-[#D90429]/10 flex items-center justify-center shrink-0 text-[#D90429]">
                 <Camera className="w-5 h-5" />
               </div>
-              <div>
+              <div className="text-left">
                 <h3 className="text-xl font-bold text-gray-900"><AnimatedNumber end={800} suffix="+" /></h3>
                 <p className="text-xs text-gray-500">Weddings Captured</p>
               </div>
@@ -140,12 +181,12 @@ export default function CoverageMap2D() {
                 show: { opacity: 1, rotateX: 0, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
               }}
               style={{ transformOrigin: "top center" }}
-              className="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(217,4,41,0.08)] transition-shadow cursor-pointer"
+              className="bg-white rounded-2xl p-4 flex flex-row items-center justify-start gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(217,4,41,0.08)] transition-shadow cursor-pointer"
             >
               <div className="w-10 h-10 rounded-full bg-[#D90429]/10 flex items-center justify-center shrink-0 text-[#D90429]">
                 <Star className="w-5 h-5" />
               </div>
-              <div>
+              <div className="text-left">
                 <h3 className="text-xl font-bold text-gray-900"><AnimatedNumber end={10} suffix="+" /></h3>
                 <p className="text-xs text-gray-500">Years Experience</p>
               </div>
@@ -157,12 +198,12 @@ export default function CoverageMap2D() {
                 show: { opacity: 1, rotateX: 0, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
               }}
               style={{ transformOrigin: "top center" }}
-              className="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(217,4,41,0.08)] transition-shadow cursor-pointer"
+              className="bg-white rounded-2xl p-4 flex flex-row items-center justify-start gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(217,4,41,0.08)] transition-shadow cursor-pointer"
             >
               <div className="w-10 h-10 rounded-full bg-[#D90429]/10 flex items-center justify-center shrink-0 text-[#D90429]">
                 <MapPin className="w-5 h-5" />
               </div>
-              <div>
+              <div className="text-left">
                 <h3 className="text-xl font-bold text-gray-900"><AnimatedNumber end={10} /></h3>
                 <p className="text-xs text-gray-500">Major Coverage Regions</p>
               </div>
@@ -174,12 +215,12 @@ export default function CoverageMap2D() {
                 show: { opacity: 1, rotateX: 0, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
               }}
               style={{ transformOrigin: "top center" }}
-              className="bg-white rounded-2xl p-4 flex items-center gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(217,4,41,0.08)] transition-shadow cursor-pointer"
+              className="bg-white rounded-2xl p-4 flex flex-row items-center justify-start gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_8px_30px_rgb(217,4,41,0.08)] transition-shadow cursor-pointer"
             >
               <div className="w-10 h-10 rounded-full bg-[#D90429]/10 flex items-center justify-center shrink-0 text-[#D90429]">
                 <Users className="w-5 h-5" />
               </div>
-              <div>
+              <div className="text-left">
                 <h3 className="text-xl font-bold text-gray-900"><AnimatedNumber end={1500} suffix="+" /></h3>
                 <p className="text-xs text-gray-500">Happy Clients</p>
               </div>
@@ -189,7 +230,7 @@ export default function CoverageMap2D() {
 
         {/* Right Column - Map UI */}
         <div 
-          className="lg:col-span-7 relative h-[600px] md:h-[800px] w-full flex items-center justify-center pt-10"
+          className="lg:col-span-7 relative h-[450px] sm:h-[600px] lg:h-[800px] w-full flex items-center justify-center pt-2 lg:pt-10 order-2 lg:order-2 mt-[-30px] lg:mt-0"
           onMouseEnter={() => setIsMapHovered(true)}
           onMouseLeave={() => setIsMapHovered(false)}
         >
