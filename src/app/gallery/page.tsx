@@ -266,13 +266,13 @@ const imagesIn = (category: string) =>
 /* ------------------------------------------------------------------ */
 /* Hero — frameless parallax photos (desktop) + scrolling image bars   */
 /* ------------------------------------------------------------------ */
-
 const HERO_PHOTOS = [
-  { src: "/images/gallery/hero/hero1.jpg", className: "left-[2%] top-[8%] w-64 xl:w-80", rotate: -7, moveX: 250, moveY: 150, entryX: -800, entryY: -400, delay: 0.7 },
-  { src: "/images/gallery/hero/hero2.jpg", className: "left-[15%] top-[28%] w-48 xl:w-64", rotate: 5, moveX: 150, moveY: -50, entryX: -800, entryY: 400, delay: 1.7 },
-  { src: "/images/gallery/hero/hero3.jpg", className: "left-[21%] top-[10%] w-48 xl:w-64", rotate: -4, moveX: 100, moveY: 200, entryX: -400, entryY: -600, delay: 0.2 },
-  { src: "/images/gallery/hero/hero4.jpg", className: "right-[3%] top-[10%] w-64 xl:w-80", rotate: 8, moveX: -250, moveY: 150, entryX: 800, entryY: -400, delay: 2.2 },
-  { src: "/images/gallery/hero/hero5.jpg", className: "right-[16%] top-[30%] w-48 xl:w-64", rotate: -5, moveX: -150, moveY: -50, entryX: 800, entryY: 400, delay: 1.2 },
+  { src: "/images/gallery/hero/hero1.jpg", className: "hidden lg:block left-[2%] top-[8%] w-64 xl:w-80", rotate: -7, moveX: 250, moveY: 150, entryX: -800, entryY: -400, delay: 0.7 },
+  { src: "/images/gallery/hero/hero2.jpg", className: "left-[5%] lg:left-[15%] top-[20%] lg:top-[28%] mt-[150px] lg:mt-0 w-24 lg:w-48 xl:w-64", rotate: 5, moveX: 150, moveY: -50, entryX: -800, entryY: 400, delay: 1.7 },
+  { src: "/images/gallery/hero/hero3.jpg", className: "hidden lg:block left-[21%] top-[10%] w-48 xl:w-64", rotate: -4, moveX: 100, moveY: 200, entryX: -400, entryY: -600, delay: 0.2 },
+  { src: "/images/gallery/hero/hero4.jpg", className: "right-[2%] lg:right-[3%] top-[2%] lg:top-[10%] mt-[20px] lg:mt-0 w-28 lg:w-64 xl:w-80", rotate: 8, moveX: -250, moveY: 150, entryX: 800, entryY: -400, delay: 2.2 },
+  { src: "/images/gallery/hero/hero5.jpg", className: "right-[16%] top-[35%] lg:top-[30%] mt-[60px] lg:mt-0 w-24 lg:w-48 xl:w-64", rotate: -5, moveX: -150, moveY: -50, entryX: 800, entryY: 400, delay: 1.2 },
+  { src: "/images/gallery/hero/hero6.jpg", className: "block lg:hidden left-[2%] top-[2%] mt-[40px] w-20", rotate: -4, moveX: 200, moveY: 150, entryX: -400, entryY: -400, delay: 0.8 },
 ];
 
 function ParallaxPhoto({
@@ -303,7 +303,7 @@ function ParallaxPhoto({
       initial={reduced ? false : { opacity: 0, x: photo.entryX, y: photo.entryY }}
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ duration: 1.2, delay: photo.delay, type: "spring", bounce: 0.3 }}
-      className={`pointer-events-none absolute z-[1] hidden lg:block ${photo.className}`}
+      className={`pointer-events-none absolute z-[1] block ${photo.className}`}
       style={{ opacity }}
     >
       <motion.figure
@@ -346,12 +346,12 @@ function MarqueeRow({
     <div className="overflow-hidden">
       <motion.div
         style={{ x }}
-        className="flex w-max gap-3"
+        className="flex w-max gap-1 sm:gap-3"
       >
         {track.map((src, i) => (
           <div
             key={`${src}-${i}`}
-            className="w-32 flex-shrink-0 overflow-hidden border-[3px] border-white shadow-2xl shadow-black/30 md:w-44"
+            className="w-[13vw] sm:w-32 md:w-44 flex-shrink-0 overflow-hidden border sm:border-[3px] border-white shadow-lg sm:shadow-2xl shadow-black/30"
           >
             <Image
               src={src}
@@ -448,7 +448,7 @@ function GalleryHero({ onJump }: { onJump: (category: string) => void }) {
           initial={reduced ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9 }}
-          className="mx-auto mt-4 max-w-md font-plusJakartaSans text-sm leading-relaxed md:text-base"
+          className="mx-auto mt-4 max-w-md font-plusJakartaSans text-xs leading-relaxed md:text-sm"
           style={{ color: `${INK}99` }}
         >
           Timeless stories captured through our lens — every frame below made it
@@ -460,9 +460,9 @@ function GalleryHero({ onJump }: { onJump: (category: string) => void }) {
           initial={reduced ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.05 }}
-          className="mt-6 flex justify-center w-full px-4"
+          className="mt-6 flex w-full max-w-full px-1 sm:px-4 sm:justify-center"
         >
-          <div className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-6 gap-y-2">
+          <div className="flex flex-nowrap sm:flex-wrap items-center justify-between sm:justify-center gap-x-1 sm:gap-x-6 gap-y-2 w-full pb-2">
             {eventCategories.map((category) => {
               const Icon = categoryIcons[category];
               return (
@@ -470,17 +470,17 @@ function GalleryHero({ onJump }: { onJump: (category: string) => void }) {
                   key={category}
                   type="button"
                   onClick={() => onJump(category)}
-                  className="group flex flex-col items-center justify-center gap-1.5 transition-colors hover:text-[#8a1212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8a1212] rounded-lg px-2 py-1"
+                  className="shrink group flex flex-col items-center justify-center gap-1 sm:gap-1.5 transition-colors hover:text-[#8a1212] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8a1212] rounded-lg px-0.5 sm:px-2 py-1"
                   style={{ color: INK }}
                 >
                   {Icon && (
                     <Icon
                       size={22}
                       strokeWidth={1.5}
-                      className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#8a1212]"
+                      className="w-5 h-5 sm:w-[22px] sm:h-[22px] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-[#8a1212]"
                     />
                   )}
-                  <span className="font-plusJakartaSans text-[10px] md:text-xs font-semibold transition-colors group-hover:text-[#8a1212]">
+                  <span className="whitespace-nowrap font-plusJakartaSans text-[8.5px] sm:text-[10px] md:text-xs font-semibold tracking-tighter sm:tracking-normal transition-colors group-hover:text-[#8a1212]">
                     {category}
                   </span>
                 </button>
@@ -489,24 +489,7 @@ function GalleryHero({ onJump }: { onJump: (category: string) => void }) {
           </div>
         </motion.div>
 
-        <motion.button
-          type="button"
-          onClick={scrollToCollection}
-          aria-label="Scroll to the collection"
-          initial={reduced ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="mx-auto mt-8 flex h-11 w-11 items-center justify-center rounded-full text-white transition-transform hover:translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8a1212]"
-          style={{ backgroundColor: RED }}
-        >
-          <motion.span
-            animate={reduced ? undefined : { y: [0, 3, 0] }}
-            transition={reduced ? undefined : { duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            className="flex h-full w-full items-center justify-center"
-          >
-            <ArrowDown size={17} aria-hidden="true" className="mt-0.5" />
-          </motion.span>
-        </motion.button>
+
       </div>
 
       {/* scrolling image bars — two opposing rows pinned to the bottom */}
@@ -1025,12 +1008,12 @@ function GalleryContent() {
         if (cloudImages.length > 0) {
           // Find which categories we successfully loaded from Cloudinary
           const dynamicCategories = new Set(cloudImages.map(img => img.category));
-          
+
           // Keep static images ONLY for categories that don't have Cloudinary images yet
-          const filtered = galleryImages.filter(img => 
+          const filtered = galleryImages.filter(img =>
             !dynamicCategories.has(img.category)
           );
-          
+
           galleryImages.length = 0; // Clear array
           galleryImages.push(...filtered, ...cloudImages);
           setDynamicLoaded(true);
