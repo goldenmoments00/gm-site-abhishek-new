@@ -2611,8 +2611,9 @@
                   animateGalleryHeader,
                 );
               } else {
-                animateGer();
-          })();
+                animateGalleryHeader();
+              }
+            })();
           </script>
         </section>
 
@@ -2813,7 +2814,7 @@
                 } else {
                   slideshowSection.style.zIndex = '1';
                 }
-     , { passive: true });
+              }, { passive: true });
             })();
           </script>
         </section>
@@ -4220,7 +4221,7 @@
                 animateServicesHeader,
               );
             } else {
-              animaesHeader();
+              animateServicesHeader();
             }
           })();
         </script>
@@ -4542,7 +4543,8 @@
         if (event.data && event.data.type === 'footerHeight') {
           var iframe = document.getElementById('react-footer-iframe');
           if (iframe) {
-            iframe.style.height = event.daeight +       }
+            iframe.style.height = event.data.height + 'px';
+          }
         }
       });
     </script>
@@ -4627,10 +4629,11 @@
           if (opacity < 0) opacity = 0;
           if (opacity > 1) opacity = 1;
 
-          icon.stylepacity;
+          icon.style.opacity = opacity;
         });
       });
-    })  </script>
+        });
+  </script>
 
   <script>
     // Custom animation for 4th portfolio panel (Rice Ceremony)
@@ -4666,9 +4669,10 @@
         comp04.style.height = (localProgress * 100) + '%';
       }
 
-      window.addEventListener('scroll', updateComp04, { ssive: true });
+      window.addEventListener('scroll', updateComp04, { passive: true });
       updateComp04();
-    })  </script>
+        });
+  </script>
 
   <style>
     /* Hero Zoom and Parallax Effect */
@@ -4741,9 +4745,10 @@
         }
       }
 
-      window.addEventListener('scroll', onScrollHer {true });
+      window.addEventListener('scroll', onScrollHero, { passive: true });
       onScrollHero();
-    })  </script>
+        });
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -4760,28 +4765,7 @@
           direction: direction
       }, '*');
       ssive: true });
-    })  </script>
+        });
+  </script>
 </body>
-
-</html> const currentScrollY = window.scrollY;
-const direction = currentScrollY > lastScrollY ? 'down' : 'up';
-lastScrollY = currentScrollY;
-
-// Send message to parent window for PillNavbar
-window.parent.postMessage({
-type: 'iframe-scroll',
-scrollY: currentScrollY,
-direction: direction
-}, '*');
-}, { passive: true });
-});
-</script>
-</body>
-
-</html>
-</script>
-</body>
-
-</html>
-
 </html>
