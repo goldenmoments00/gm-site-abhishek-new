@@ -84,10 +84,28 @@
 
     /* On smaller screens, wrap to two lines */
     @media screen and (max-width: 991px) {
+      .section-home-header .heading-component {
+        margin-top: 330px;
+      }
+
+      .gallery-section-header {
+        transform: translateY(100px) !important;
+      }
+
+      .header-container.is-header {
+        align-content: flex-start !important;
+        row-gap: 10px !important;
+      }
+
+      .header-container.is-header .header-title {
+        line-height: 0.75em !important;
+      }
+
       .header-container.is-header .space-break {
         display: block;
         flex-basis: 100%;
-        height: 10px;
+        height: 0px;
+        margin-bottom: 0px;
       }
 
       .header-container.is-header .space-break .heading-block._06a,
@@ -97,6 +115,36 @@
 
       .header-container.is-header .heading-block._07 {
         margin-left: 0;
+      }
+
+      .header-component-grid {
+        height: 100svh !important;
+      }
+
+      .section-home-header .header-content-grid {
+        transform: translateY(-50px);
+      }
+
+      .section-home-header .header-content-wrap:not(.text-align-center) {
+        transform: translateY(-50px);
+      }
+
+      .section-home-header .header-content-wrap.text-align-center {
+        transform: translateY(-20px);
+      }
+
+      .section-home-header .header-content-wrap.text-align-center .subtitle {
+        font-size: 1rem !important;
+        margin-bottom: 0px !important;
+      }
+
+      .section-home-header .header-content-wrap.text-align-center .spacer-small {
+        display: none !important;
+      }
+
+      .section-home-header .header-content-wrap.text-align-center .text-size-regular {
+        font-size: 0.7rem !important;
+        line-height: 1.2 !important;
       }
     }
 
@@ -143,10 +191,12 @@
     /* Mobile responsive - swap to portrait-optimized hero image */
     @media screen and (max-width: 991px) {
       .section-home-header {
-        /* New Mobile Hero Image */
-        background-image: url("/webflow/pictlens/images/gm-hero.jpg");
-        background-position: center center;
-        min-height: 100vh;
+        /* Remove Hero Image on Mobile */
+        background-image: none !important;
+        min-height: 100svh !important;
+        transform: none !important;
+        animation: none !important;
+        transition: none !important;
       }
     }
 
@@ -2561,9 +2611,8 @@
                   animateGalleryHeader,
                 );
               } else {
-                animateGalleryHeader();
-              }
-            })();
+                animateGer();
+          })();
           </script>
         </section>
 
@@ -2764,7 +2813,7 @@
                 } else {
                   slideshowSection.style.zIndex = '1';
                 }
-              }, { passive: true });
+     , { passive: true });
             })();
           </script>
         </section>
@@ -4171,7 +4220,7 @@
                 animateServicesHeader,
               );
             } else {
-              animateServicesHeader();
+              animaesHeader();
             }
           })();
         </script>
@@ -4493,8 +4542,7 @@
         if (event.data && event.data.type === 'footerHeight') {
           var iframe = document.getElementById('react-footer-iframe');
           if (iframe) {
-            iframe.style.height = event.data.height + 'px';
-          }
+            iframe.style.height = event.daeight +       }
         }
       });
     </script>
@@ -4579,11 +4627,10 @@
           if (opacity < 0) opacity = 0;
           if (opacity > 1) opacity = 1;
 
-          icon.style.opacity = opacity;
+          icon.stylepacity;
         });
       });
-    });
-  </script>
+    })  </script>
 
   <script>
     // Custom animation for 4th portfolio panel (Rice Ceremony)
@@ -4619,10 +4666,9 @@
         comp04.style.height = (localProgress * 100) + '%';
       }
 
-      window.addEventListener('scroll', updateComp04, { passive: true });
+      window.addEventListener('scroll', updateComp04, { ssive: true });
       updateComp04();
-    });
-  </script>
+    })  </script>
 
   <style>
     /* Hero Zoom and Parallax Effect */
@@ -4652,7 +4698,14 @@
 
     @media screen and (max-width: 991px) {
       .section-home-header::before {
-        background-image: url("/webflow/pictlens/images/gm-hero.jpg");
+        display: block !important;
+        background-image: url("/hero-mobile.jpg") !important;
+        background-size: cover !important;
+        background-position: center top !important;
+        background-repeat: no-repeat !important;
+        transform: none !important;
+        animation: none !important;
+        transition: none !important;
       }
     }
 
@@ -4688,10 +4741,9 @@
         }
       }
 
-      window.addEventListener('scroll', onScrollHero, { passive: true });
+      window.addEventListener('scroll', onScrollHer {true });
       onScrollHero();
-    });
-  </script>
+    })  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -4706,10 +4758,30 @@
           type: 'iframe-scroll',
           scrollY: currentScrollY,
           direction: direction
-        }, '*');
-      }, { passive: true });
-    });
-  </script>
+      }, '*');
+      ssive: true });
+    })  </script>
 </body>
+
+</html> const currentScrollY = window.scrollY;
+const direction = currentScrollY > lastScrollY ? 'down' : 'up';
+lastScrollY = currentScrollY;
+
+// Send message to parent window for PillNavbar
+window.parent.postMessage({
+type: 'iframe-scroll',
+scrollY: currentScrollY,
+direction: direction
+}, '*');
+}, { passive: true });
+});
+</script>
+</body>
+
+</html>
+</script>
+</body>
+
+</html>
 
 </html>
