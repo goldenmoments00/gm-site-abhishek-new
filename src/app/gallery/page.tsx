@@ -268,11 +268,11 @@ const imagesIn = (category: string) =>
 /* ------------------------------------------------------------------ */
 const HERO_PHOTOS = [
   { src: "/images/gallery/hero/hero1.jpg", className: "hidden lg:block left-[2%] top-[8%] w-64 xl:w-80", rotate: -7, moveX: 250, moveY: 150, entryX: -800, entryY: -400, delay: 0.7 },
-  { src: "/images/gallery/hero/hero2.jpg", className: "left-[5%] lg:left-[15%] top-[20%] lg:top-[28%] mt-[150px] lg:mt-0 w-24 lg:w-48 xl:w-64", rotate: 5, moveX: 150, moveY: -50, entryX: -800, entryY: 400, delay: 1.7 },
+  { src: "/images/gallery/hero/hero2.jpg", className: "left-[5%] lg:left-[15%] top-[20%] lg:top-[28%] mt-[300px] lg:mt-0 w-24 lg:w-48 xl:w-64", rotate: 5, moveX: 150, moveY: -50, entryX: -800, entryY: 400, delay: 1.7 },
   { src: "/images/gallery/hero/hero3.jpg", className: "hidden lg:block left-[21%] top-[10%] w-48 xl:w-64", rotate: -4, moveX: 100, moveY: 200, entryX: -400, entryY: -600, delay: 0.2 },
   { src: "/images/gallery/hero/hero4.jpg", className: "right-[2%] lg:right-[3%] top-[2%] lg:top-[10%] mt-[20px] lg:mt-0 w-28 lg:w-64 xl:w-80", rotate: 8, moveX: -250, moveY: 150, entryX: 800, entryY: -400, delay: 2.2 },
-  { src: "/images/gallery/hero/hero5.jpg", className: "right-[16%] top-[35%] lg:top-[30%] mt-[60px] lg:mt-0 w-24 lg:w-48 xl:w-64", rotate: -5, moveX: -150, moveY: -50, entryX: 800, entryY: 400, delay: 1.2 },
-  { src: "/images/gallery/hero/hero6.jpg", className: "block lg:hidden left-[2%] top-[2%] mt-[40px] w-20", rotate: -4, moveX: 200, moveY: 150, entryX: -400, entryY: -400, delay: 0.8 },
+  { src: "/images/gallery/hero/hero5.jpg", className: "right-[16%] top-[35%] lg:top-[30%] mt-[200px] lg:mt-0 w-24 lg:w-48 xl:w-64", rotate: -5, moveX: -150, moveY: -50, entryX: 800, entryY: 400, delay: 1.2 },
+  { src: "/images/gallery/hero/hero6.jpg", className: "block lg:hidden left-[2%] top-[2%] mt-[55px] w-28", rotate: -4, moveX: 200, moveY: 150, entryX: -400, entryY: -400, delay: 0.8 },
 ];
 
 function ParallaxPhoto({
@@ -400,7 +400,7 @@ function GalleryHero({ onJump }: { onJump: (category: string) => void }) {
       ))}
 
       {/* centre composition */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-5 pb-40 pt-32 text-center md:pb-52 md:pt-36">
+      <div className="relative z-10 flex flex-col items-center justify-center px-5 pb-40 pt-[237px] text-center md:pb-52 md:pt-36">
         <motion.p
           initial={reduced ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
